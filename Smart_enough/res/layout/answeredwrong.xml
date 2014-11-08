@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+   
+
+    <EditText
+        android:id="@+id/recordName"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="26dp"
+        android:hint="Enter your name"
+        android:textColor="#FFFFFF"
+    	android:inputType="textPersonName"
+        android:ems="10" >
+
+        <requestFocus android:layout_width="wrap_content" />
+
+    </EditText>
+
+    <Button
+        android:id="@+id/gotomenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/saveresult"
+        android:layout_below="@+id/saveresult"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"
+        android:background="@color/smeshka"
+        android:text="Go to menu" />
+
+    <TextView
+        android:id="@+id/lastquestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recordName"
+        android:layout_below="@+id/gotomenu"
+        android:layout_marginTop="60dp"
+        android:textColor="#FFFFFF"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/rightanswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lastquestion"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/saveresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/recordName"
+        android:layout_alignBottom="@+id/recordName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:onClick="onClick"
+        android:background="@color/smeshka"
+        android:text="Save result" />
+
+</RelativeLayout>
+
