@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import com.example.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;

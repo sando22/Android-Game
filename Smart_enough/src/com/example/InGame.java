@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.example.R;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -29,7 +31,7 @@ public class InGame extends Activity {
 	static Button N3;
 	static Button N4;
 	TextView Question, StreakCounter;
-	static String all_info[];
+	static String wholeFile[];
 	String line = null;
 	AssetManager am;
 	static int questionIndex;
@@ -37,17 +39,38 @@ public class InGame extends Activity {
 	static String[] answers = new String[4];
 	Random random = new Random();
 	Handler handler = new Handler(); 
+	
 	Runnable run_right = new Runnable() {
 		 public void run() { 
              init();
 			 setDefaultButton();
         } 
 	};
+	
 	Runnable run_wrong = new Runnable() {
 		 public void run() { 
 			 goToAnsweredWrong();
 			 setDefaultButton();
        } 
+	};
+	
+	Runnable read_file = new Runnable() {
+		public void run() {
+			i = 0;
+			try {
+				am = getAssets();
+				InputStream is = am.open("file.txt");
+				InputStreamReader inputStreamReader = new InputStreamReader(is);
+				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+				while ((line=bufferedReader.readLine()) != null && i < linescount){
+					wholeFile[i] = line;
+					i++;
+				}
+				bufferedReader.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 	};
 	
 	@Override
@@ -67,9 +90,9 @@ public class InGame extends Activity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		all_info = new String[linescount];		
-		readFile(all_info);
-		thisActivity  = this;
+		wholeFile = new String[linescount];		
+		read_file.run();
+		thisActivity = this;
 	}
 	
 	protected void onResume() {
@@ -108,10 +131,10 @@ public class InGame extends Activity {
 					break;
 				}else continue;
 			}else{
-				Question.setText(all_info[questionIndex]);
+				Question.setText(wholeFile[questionIndex]);
 				invalidNumbers.add(questionIndex);
 				for(i=0;i<4;i++){
-					answers[i] = all_info[questionIndex + i + 1];
+					answers[i] = wholeFile[questionIndex + i + 1];
 				}
 				break;
 			}
@@ -147,23 +170,6 @@ public class InGame extends Activity {
 			N2.setEnabled(true);
 			N3.setEnabled(true);
 			N4.setEnabled(true);
-		}
-	}
-	
-	private void readFile(String[] lines){
-		i = 0;
-		try {
-			am = getAssets();
-			InputStream is = am.open("file.txt");
-			InputStreamReader inputStreamReader = new InputStreamReader(is);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			while ((line=bufferedReader.readLine()) != null && i < linescount){
-				lines[i] = line;
-				i++;
-			}
-			bufferedReader.close();
-		} catch (Exception e) {
-			System.out.println(e);
 		}
 	}
 	
@@ -260,7 +266,7 @@ public class InGame extends Activity {
 	}
 	
 	public static String getCurrentQuestion(){
-		return all_info[questionIndex];		
+		return wholeFile[questionIndex];		
 	}
 	
 	public static String getCurrentRightAnswer(){

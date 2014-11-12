@@ -2,6 +2,8 @@ package com.example;
 
 import java.util.Random;
 
+import com.example.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

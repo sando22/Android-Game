@@ -1,36 +1,33 @@
 package com.example;
 
+import com.example.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class Menu   extends Activity {
 	
-	Button F1,F2,F3;
-	Toast toast;
+	Button startButton,scoresButton;
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
-		F1=	(Button) findViewById(R.id.Start);
-		F2 = (Button) findViewById(R.id.Scores);	
-		F3 = (Button) findViewById(R.id.Exit);
-		toast = Toast.makeText(getBaseContext(), "Press exit to leave", Toast.LENGTH_SHORT);
+		startButton=	(Button) findViewById(R.id.Start);
+		scoresButton = (Button) findViewById(R.id.Scores);	
 		
 	}
 	
 	@Override
 	public void onBackPressed() {
-		toast.show();
+		finish();
 		return;
 	}
 	
 	public void onClick(View v) {
-		toast.cancel();
 		switch(v.getId()) {
 	        case R.id.Start:
 	        	Intent myIntent = new Intent(Menu.this, InGame.class);
@@ -40,8 +37,6 @@ public class Menu   extends Activity {
 				Intent myScoreIntent = new Intent(Menu.this, HighScore.class);
 				Menu.this.startActivity(myScoreIntent);
 				break;
-	        case R.id.Exit:
-	        	finish();
 		}
 	}
 }

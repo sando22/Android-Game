@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

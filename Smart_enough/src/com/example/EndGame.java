@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import com.example.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
