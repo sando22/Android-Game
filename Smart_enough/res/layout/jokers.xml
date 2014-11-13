@@ -6,7 +6,7 @@
     android:clickable="true" >
 
     <Button
-        android:id="@+id/audience"
+        android:id="@+id/audienceButton"
         android:layout_width="145dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
@@ -15,7 +15,7 @@
         android:onClick="onClick" />
 
     <Button
-        android:id="@+id/fifty"
+        android:id="@+id/fiftyButton"
         android:layout_width="145dp"
         android:layout_height="130dp"
         android:layout_alignParentBottom="true"
@@ -25,7 +25,7 @@
         android:onClick="onClick" />
 
     <Button
-        android:id="@+id/change"
+        android:id="@+id/changeButton"
         android:layout_width="145dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"

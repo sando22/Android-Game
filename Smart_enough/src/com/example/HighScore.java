@@ -17,11 +17,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class HighScore extends Activity {
-	Button Back;
-	TextView Scoretext;
-	String Output, Score;
+	Button deleteButton;
+	TextView scoreText;
+	String output, score;
 	ScrollView myScrollView;
-	int i;
+	
+	Runnable r = new Runnable() {
+		
+		@Override
+		public void run() {
+			scoreText.setText(readFile());
+		}
+	};
+	
+	Thread t = new Thread(r);
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,11 +40,23 @@ public class HighScore extends Activity {
 		myScrollView.setVerticalScrollBarEnabled(false);
 		myScrollView.setHorizontalScrollBarEnabled(false);
 		
-		Back = (Button) findViewById (R.id.backbutton);
-		Scoretext = (TextView) findViewById(R.id.scoretext);
-		
-		Scoretext.setText(readFile());
-		
+		deleteButton = (Button) findViewById(R.id.deleteButton);
+		scoreText = (TextView) findViewById(R.id.scoreText);
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void onClick(View v) {
+		switch(v.getId()) {
+			case R.id.deleteButton:
+				deleteFile("Scores.txt");
+				finish();
+				break;
+			}
 	}
 	
 	private String readFile(){
@@ -44,8 +65,8 @@ public class HighScore extends Activity {
 			InputStream is = openFileInput("Scores.txt");
 			InputStreamReader inputStreamReader = new InputStreamReader(is);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			while ((Output=bufferedReader.readLine()) != null){
-				lines += Output + " \n ";
+			while ((output=bufferedReader.readLine()) != null){
+				lines += output + " \n ";
 			}
 			bufferedReader.close();
 		} catch (FileNotFoundException e) {
@@ -54,17 +75,5 @@ public class HighScore extends Activity {
 	        Log.e("login activity", "Can not read file: " + e.toString());
 		}
 		return lines;
-	}
-	
-	public void onClick(View v) {
-		switch(v.getId()) {
-		case R.id.backbutton:
-			finish();
-			break;
-		case R.id.deletebutton:
-			deleteFile("Scores.txt");
-			finish();
-			break;
-		}
 	}
 }

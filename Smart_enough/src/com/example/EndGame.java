@@ -11,22 +11,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EndGame extends Activity {
-	Button save, menu;
-	EditText name;
+	Button saveButton, menuButton;
+	EditText recordName;
+	TextView lastQuestion, rightAnswer;
 	Toast saveToast;
+	
+	Runnable r = new Runnable() {
+		
+		@Override
+		public void run() {
+			writeToFile(String.valueOf(InGame.getRightAnswersCounter()) + " - " + recordName.getText().toString());
+			
+		}
+	};
+	
+	Thread t = new Thread(r);
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.endgame);
 		
-		save = (Button) findViewById (R.id.saveresult);
-		menu = (Button) findViewById (R.id.gotomenu);
-		name = (EditText) findViewById(R.id.recordName);
-		saveToast = Toast.makeText(getBaseContext(), "Result saved", Toast.LENGTH_SHORT);
+		saveButton = (Button) findViewById (R.id.saveResult);
+		menuButton = (Button) findViewById (R.id.goToMenu);
+		recordName = (EditText) findViewById(R.id.recordName);
+		lastQuestion = (TextView) findViewById(R.id.lastQuestion);
+		rightAnswer = (TextView) findViewById(R.id.rightAnswer);
+		saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 		
+		if (InGame.resumeFunctionality == 404){
+			lastQuestion.setText(InGame.getCurrentQuestion());
+			lastQuestion.setVisibility(View.VISIBLE);
+			rightAnswer.setText("The right answer was: " + InGame.getCurrentRightAnswer());
+			rightAnswer.setVisibility(View.VISIBLE);
+		}
 	}
 	
 	private void writeToFile(String data) {
@@ -45,20 +66,31 @@ public class EndGame extends Activity {
 	
 	public void onClick(View v) {
 		switch(v.getId()) {
-		case R.id.saveresult:
-			if (name.getText().toString().matches("")){
-				saveToast.setText("Can't save without name!");
+			case R.id.saveResult:
+				if (InGame.resumeFunctionality == 100) InGame.resumeFunctionality = 403;
+				if (recordName.getText().toString().matches("")){
+					saveToast.setText("Can't save without name!");
+					saveToast.show();
+				}else{
+					t.start();
+					try {
+						t.join();
+						saveToast.setText("Result saved");
+						saveToast.show();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+						saveToast.setText("Something fucked up!");
+						saveToast.show();
+					}
+					finish();
+				}
+				break;
+			case R.id.goToMenu:
+				saveToast.setText("Result not saved");
 				saveToast.show();
-			}else{
-				writeToFile(String.valueOf(InGame.getRightAnswersCounter()) + " - " + name.getText().toString());
-				saveToast.setText("Result saved");
-				saveToast.show();
+				InGame.resumeFunctionality = 403;
 				finish();
-			}
-			break;
-		case R.id.gotomenu:
-			finish();
-			break;
+				break;
 		}
 	}
 }

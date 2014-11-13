@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000" >
+   
 
     <EditText
         android:id="@+id/recordName"
@@ -17,22 +18,44 @@
     	android:inputType="textPersonName"
         android:ems="10" >
 
-        <requestFocus />
+        <requestFocus android:layout_width="wrap_content" />
+
     </EditText>
 
     <Button
-        android:id="@+id/gotomenu"
+        android:id="@+id/goToMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/saveresult"
-        android:layout_below="@+id/saveresult"
+        android:layout_alignLeft="@+id/saveResult"
+        android:layout_below="@+id/saveResult"
         android:layout_marginTop="20dp"
         android:onClick="onClick"
         android:background="@color/smeshka"
         android:text="Go to menu" />
 
+    <TextView
+        android:id="@+id/lastQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recordName"
+        android:layout_below="@+id/goToMenu"
+        android:layout_marginTop="60dp"
+        android:textColor="#FFFFFF"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/rightAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lastQuestion"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <Button
-        android:id="@+id/saveresult"
+        android:id="@+id/saveResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/recordName"

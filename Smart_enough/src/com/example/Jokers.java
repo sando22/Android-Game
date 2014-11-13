@@ -12,22 +12,22 @@ import android.widget.Toast;
 
 public class Jokers extends Activity {
 	
-	Toast help;
+	Toast helpToast;
 	int rightAnswerNumber;
 	int i, j;
-	static int[] used = new int[3];
+	static int[] usedJokers = new int[3];
 	Random random = new Random();
-	Button fifty,change,audience;
+	Button fiftyButton, changeButton, audienceButton;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jokers);
 		
-		fifty = (Button) findViewById (R.id.fifty);
-		change = (Button) findViewById (R.id.change);	
-		audience = (Button) findViewById (R.id.audience);
+		fiftyButton = (Button) findViewById (R.id.fiftyButton);
+		changeButton = (Button) findViewById (R.id.changeButton);	
+		audienceButton = (Button) findViewById (R.id.audienceButton);
 		
-		help = Toast.makeText(getBaseContext(), "bad", Toast.LENGTH_LONG);
+		helpToast = Toast.makeText(getBaseContext(), "bad", Toast.LENGTH_LONG);
 		rightAnswerNumber = InGame.getCurrentRightAnswerNumber();
 		do{
 			i = random.nextInt(4);
@@ -35,19 +35,19 @@ public class Jokers extends Activity {
 		} while (i==rightAnswerNumber || j==rightAnswerNumber || i==j);
 		
 		for(int k=0;k<3;k++){
-			if (used[k] == 1){
+			if (usedJokers[k] == 1){
 				switch (k){
 					case 0:
-						audience.setBackgroundResource(R.drawable.joker_public_gg);
-						audience.setEnabled(false);
+						audienceButton.setBackgroundResource(R.drawable.joker_public_gg);
+						audienceButton.setEnabled(false);
 						break;
 					case 1:
-						change.setBackgroundResource(R.drawable.joker_change_gg);
-						change.setEnabled(false);
+						changeButton.setBackgroundResource(R.drawable.joker_change_gg);
+						changeButton.setEnabled(false);
 						break;
 					case 2:
-						fifty.setBackgroundResource(R.drawable.joker_50_gg);
-						fifty.setEnabled(false);
+						fiftyButton.setBackgroundResource(R.drawable.joker_50_gg);
+						fiftyButton.setEnabled(false);
 						break;
 				}
 			}
@@ -56,23 +56,23 @@ public class Jokers extends Activity {
 
 	public void onClick(View v) {
 		switch(v.getId()) {
-		case R.id.audience:
-			help.setText("Audience voted mostly for " + InGame.getCurrentRightAnswer());
-			help.show();
-			used[0] = 1;
+		case R.id.audienceButton:
+			helpToast.setText("Audience voted mostly for " + InGame.getCurrentRightAnswer());
+			helpToast.show();
+			usedJokers[0] = 1;
 			finish();
 			break;
-		case R.id.change:
-			help.setText("Answer changed");
-			help.show();
-			InGame.resume_functionality = 0;
-			used[1] = 1;
+		case R.id.changeButton:
+			helpToast.setText("Answer changed");
+			helpToast.show();
+			InGame.resumeFunctionality = 0;
+			usedJokers[1] = 1;
 			finish();
 			break;
-		case R.id.fifty:
+		case R.id.fiftyButton:
 			fiftyButtonWork(i);
 			fiftyButtonWork(j);
-			used[2] = 1;
+			usedJokers[2] = 1;
 			finish();
 			break;
 		}
@@ -81,16 +81,16 @@ public class Jokers extends Activity {
 	void fiftyButtonWork(int but){
 		switch (but){
 			case 0:
-				InGame.N1.setEnabled(false);
+				InGame.answerButton1.setEnabled(false);
 				break;
 			case 1:
-				InGame.N2.setEnabled(false);
+				InGame.answerButton2.setEnabled(false);
 				break;
 			case 2:
-				InGame.N3.setEnabled(false);
+				InGame.answerButton3.setEnabled(false);
 				break;
 			case 3:
-				InGame.N4.setEnabled(false);
+				InGame.answerButton4.setEnabled(false);
 				break;
 		}
 	}
