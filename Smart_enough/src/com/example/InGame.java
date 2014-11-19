@@ -96,14 +96,9 @@ public class InGame extends Activity {
 	
 	protected void onResume() {
 		super.onResume();
-		switch (resumeFunctionality){
-		case 0:
+		if (resumeFunctionality == 0){
 			init();
 			resumeFunctionality++;
-			break;
-		case 403:
-			finish();
-			break;
 		}
 	}
 	

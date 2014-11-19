@@ -88,7 +88,7 @@ public class EndGame extends Activity {
 			case R.id.goToMenu:
 				saveToast.setText("Result not saved");
 				saveToast.show();
-				InGame.resumeFunctionality = 403;
+				InGame.thisActivity.finish();
 				finish();
 				break;
 		}

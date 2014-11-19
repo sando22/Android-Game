@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 
 import com.example.R;
 
@@ -60,13 +64,13 @@ public class HighScore extends Activity {
 	}
 	
 	private String readFile(){
-		String lines = "";
+		ArrayList<String> als = new ArrayList<String>();
 		try {
 			InputStream is = openFileInput("Scores.txt");
 			InputStreamReader inputStreamReader = new InputStreamReader(is);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			while ((output=bufferedReader.readLine()) != null){
-				lines += output + " \n ";
+				als.add(output);
 			}
 			bufferedReader.close();
 		} catch (FileNotFoundException e) {
@@ -74,6 +78,22 @@ public class HighScore extends Activity {
 	    } catch (IOException e) {
 	        Log.e("login activity", "Can not read file: " + e.toString());
 		}
-		return lines;
+		return sortResult(als);
+	}
+	
+	private String sortResult(ArrayList<String> lines){
+		HighScoreComparator cmp = new HighScoreComparator();
+		String toPost = "";
+		
+		Collections.sort(lines, cmp);
+		if (lines.size() > 10){
+			for (int i=lines.size()-1;i>14;i--){
+				lines.remove(i);
+			}
+		}
+		for (String string : lines) {
+			toPost += string + "\n";
+		}
+		return toPost;
 	}
 }
