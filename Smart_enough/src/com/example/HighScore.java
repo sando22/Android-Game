@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 
 import com.example.R;
 
@@ -16,15 +14,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class HighScore extends Activity {
-	Button deleteButton;
-	TextView scoreText;
-	String output, score;
-	ScrollView myScrollView;
+	private TextView scoreText;
+	private String output;
 	
 	Runnable r = new Runnable() {
 		
@@ -39,12 +33,7 @@ public class HighScore extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.highscore);
-		myScrollView = (ScrollView) findViewById(R.id.mainScroll);
 		
-		myScrollView.setVerticalScrollBarEnabled(false);
-		myScrollView.setHorizontalScrollBarEnabled(false);
-		
-		deleteButton = (Button) findViewById(R.id.deleteButton);
 		scoreText = (TextView) findViewById(R.id.scoreText);
 		t.start();
 		try {
@@ -83,17 +72,17 @@ public class HighScore extends Activity {
 	
 	private String sortResult(ArrayList<String> lines){
 		HighScoreComparator cmp = new HighScoreComparator();
-		String toPost = "";
+		String stringToPost = "";
 		
 		Collections.sort(lines, cmp);
 		if (lines.size() > 10){
-			for (int i=lines.size()-1;i>14;i--){
+			for (int i=lines.size()-1;i>9;i--){
 				lines.remove(i);
 			}
 		}
 		for (String string : lines) {
-			toPost += string + "\n";
+			stringToPost += string + "\n";
 		}
-		return toPost;
+		return stringToPost;
 	}
 }
