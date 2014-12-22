@@ -67,7 +67,7 @@ public class EndGame extends Activity {
 	public void onClick(View v) {
 		switch(v.getId()) {
 			case R.id.saveResult:
-				if (InGame.resumeFunctionality == 100) InGame.resumeFunctionality = 403;
+				if (InGame.resumeFunctionality == 100) InGame.thisActivity.finish();
 				if (recordName.getText().toString().matches("")){
 					saveToast.setText("Can't save without name!");
 					saveToast.show();

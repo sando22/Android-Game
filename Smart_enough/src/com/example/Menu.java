@@ -12,7 +12,6 @@ public class Menu   extends Activity {
 	
 	Button startButton,scoresButton;
 	
-	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);

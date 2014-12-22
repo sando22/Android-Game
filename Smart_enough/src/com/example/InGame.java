@@ -294,5 +294,5 @@ public class InGame extends Activity {
 		answerButton3.setClickable(false);
 		answerButton4.setClickable(false);
 	}
-
+	
 }
