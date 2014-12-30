@@ -27,7 +27,6 @@ public class Jokers extends Activity {
 		changeButton = (Button) findViewById (R.id.changeButton);	
 		audienceButton = (Button) findViewById (R.id.audienceButton);
 		
-		helpToast = Toast.makeText(getBaseContext(), "bad", Toast.LENGTH_LONG);
 		rightAnswerNumber = InGame.getCurrentRightAnswerNumber();
 		do{
 			i = random.nextInt(4);
@@ -55,26 +54,27 @@ public class Jokers extends Activity {
 	}
 
 	public void onClick(View v) {
+		helpToast = Toast.makeText(getBaseContext(), "bad", Toast.LENGTH_LONG);
 		switch(v.getId()) {
-		case R.id.audienceButton:
-			helpToast.setText("Audience voted mostly for " + InGame.getCurrentRightAnswer());
-			helpToast.show();
-			usedJokers[0] = 1;
-			finish();
-			break;
-		case R.id.changeButton:
-			helpToast.setText("Answer changed");
-			helpToast.show();
-			InGame.resumeFunctionality = 0;
-			usedJokers[1] = 1;
-			finish();
-			break;
-		case R.id.fiftyButton:
-			fiftyButtonWork(i);
-			fiftyButtonWork(j);
-			usedJokers[2] = 1;
-			finish();
-			break;
+			case R.id.audienceButton:
+				helpToast.setText("Audience voted mostly for " + InGame.getCurrentRightAnswer());
+				helpToast.show();
+				usedJokers[0] = 1;
+				finish();
+				break;
+			case R.id.changeButton:
+				helpToast.setText("Answer changed");
+				helpToast.show();
+				InGame.resumeFunctionality = 0;
+				usedJokers[1] = 1;
+				finish();
+				break;
+			case R.id.fiftyButton:
+				fiftyButtonWork(i);
+				fiftyButtonWork(j);
+				usedJokers[2] = 1;
+				finish();
+				break;
 		}
 	}
 	

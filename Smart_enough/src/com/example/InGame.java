@@ -80,8 +80,8 @@ public class InGame extends Activity {
 		answerButton2 = (Button) findViewById (R.id.B);	
 		answerButton3 = (Button) findViewById (R.id.C);
 		answerButton4 = (Button) findViewById (R.id.D);
-		question = (TextView) findViewById(R.id.Question);
-		streakCounter = (TextView) findViewById(R.id.StreakCounter);
+		question = (TextView) findViewById(R.id.ingameQuestion);
+		streakCounter = (TextView) findViewById(R.id.ingameStreakCounter);
 		streakCounter.setText("Show your knowledge");
 		rightAnswersCounter = 0;
 		try {
@@ -242,11 +242,11 @@ public class InGame extends Activity {
 	        		handler.postDelayed(runWrong, 500);
 	        	}
 	        	break;
-	        case R.id.Jokers:
+	        case R.id.ingameJokerButton:
 	        	Intent myJokerIntent = new Intent(InGame.this, Jokers.class);
 				InGame.this.startActivity(myJokerIntent);
 	        	break;
-	        case R.id.Menu:
+	        case R.id.ingameMenuButton:
 	        	Intent myMenuIntent = new Intent(InGame.this, EndGame.class);
 				InGame.this.startActivity(myMenuIntent);
 				resumeFunctionality = 100;
@@ -278,10 +278,10 @@ public class InGame extends Activity {
 	}
 	
 	private void setDefaultButton(){
-		answerButton1.setBackgroundResource(R.color.ingame);
-		answerButton2.setBackgroundResource(R.color.ingame);
-		answerButton3.setBackgroundResource(R.color.ingame);
-		answerButton4.setBackgroundResource(R.color.ingame);
+		answerButton1.setBackgroundResource(R.color.ingame_answer);
+		answerButton2.setBackgroundResource(R.color.ingame_answer);
+		answerButton3.setBackgroundResource(R.color.ingame_answer);
+		answerButton4.setBackgroundResource(R.color.ingame_answer);
 		answerButton1.setClickable(true);
 		answerButton2.setClickable(true);
 		answerButton3.setClickable(true);

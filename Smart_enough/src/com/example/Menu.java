@@ -15,8 +15,8 @@ public class Menu   extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
-		startButton=	(Button) findViewById(R.id.Start);
-		scoresButton = (Button) findViewById(R.id.Scores);	
+		startButton=	(Button) findViewById(R.id.menuStartButton);
+		scoresButton = (Button) findViewById(R.id.menuScoresButton);	
 		
 	}
 	
@@ -28,11 +28,11 @@ public class Menu   extends Activity {
 	
 	public void onClick(View v) {
 		switch(v.getId()) {
-	        case R.id.Start:
+	        case R.id.menuStartButton:
 	        	Intent myIntent = new Intent(Menu.this, InGame.class);
 				Menu.this.startActivity(myIntent);
 				break;
-	        case R.id.Scores:
+	        case R.id.menuScoresButton:
 				Intent myScoreIntent = new Intent(Menu.this, HighScore.class);
 				Menu.this.startActivity(myScoreIntent);
 				break;

@@ -34,7 +34,7 @@ public class HighScore extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.highscore);
 		
-		scoreText = (TextView) findViewById(R.id.scoreText);
+		scoreText = (TextView) findViewById(R.id.highscoreScoreText);
 		t.start();
 		try {
 			t.join();
@@ -45,7 +45,7 @@ public class HighScore extends Activity {
 	
 	public void onClick(View v) {
 		switch(v.getId()) {
-			case R.id.deleteButton:
+			case R.id.highscoreDeleteButton:
 				deleteFile("Scores.txt");
 				finish();
 				break;

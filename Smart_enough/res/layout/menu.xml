@@ -6,36 +6,36 @@
     android:layout_height="match_parent" >
 
   <Button
-      android:id="@+id/Start"
+      android:id="@+id/menuStartButton"
       android:layout_width="250dp"
       android:layout_height="wrap_content"
-      android:layout_above="@+id/Scores"
+      android:layout_above="@+id/menuScoresButton"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="26dp"
       android:onClick="onClick"
-      android:text="Start Game"
-      android:background="@color/smeshka"
+      android:text="@string/menu_StartButton"
+      android:background="@color/menu_buttons"
       android:textSize="20sp" />
 
   <ImageView
-      android:id="@+id/imageView1"
+      android:id="@+id/menuImage"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_above="@+id/Start"
+      android:layout_above="@+id/menuStartButton"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="64dp"
       android:src="@drawable/second" />
 
   <Button
-      android:id="@+id/Scores"
+      android:id="@+id/menuScoresButton"
       android:layout_width="250dp"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="66dp"
-      android:background="@color/smeshka"
+      android:background="@color/menu_buttons"
       android:onClick="onClick"
-      android:text="High Score"
+      android:text="@string/menu_ScoreButton"
       android:textSize="20sp" />
   
 </RelativeLayout>

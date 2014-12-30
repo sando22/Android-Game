@@ -10,24 +10,23 @@
     tools:context=".XmlMainActivity" >
 
     <TextView
-        android:id="@+id/Question"
+        android:id="@+id/ingameQuestion"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="46dp"
         android:textColor="#FFFFFF"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/StreakCounter"
+        android:id="@+id/ingameStreakCounter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Question"
+        android:layout_alignLeft="@+id/ingameQuestion"
         android:layout_alignParentTop="true"
-        android:text=""
         android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
       <Button
           android:id="@+id/D"
@@ -36,8 +35,7 @@
           android:layout_alignLeft="@+id/C"
           android:layout_alignParentBottom="true"
           android:onClick="onClick"
-          android:text=""
-          android:background="@color/ingame"
+          android:background="@color/ingame_answer"
           android:textSize="20sp" />
 
       <Button
@@ -47,8 +45,7 @@
           android:layout_above="@+id/D"
           android:layout_alignLeft="@+id/B"
           android:onClick="onClick"
-          android:text=""
-          android:background="@color/ingame"
+          android:background="@color/ingame_answer"
           android:textSize="20sp" />
 
       <Button
@@ -58,8 +55,7 @@
           android:layout_above="@+id/C"
           android:layout_alignLeft="@+id/A"
           android:onClick="onClick"
-          android:text=""
-          android:background="@color/ingame"
+          android:background="@color/ingame_answer"
           android:textSize="20sp" />
 
       <Button
@@ -70,30 +66,30 @@
           android:layout_centerHorizontal="true"
           android:onClick="onClick"
           android:text=""
-          android:background="@color/ingame"
+          android:background="@color/ingame_answer"
           android:textSize="20sp" />
 
       <Button
-          android:id="@+id/Menu"
+          android:id="@+id/ingameMenuButton"
           style="?android:attr/buttonStyleSmall"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentRight="true"
-          android:layout_alignTop="@+id/StreakCounter"
-          android:background="@color/smeshka"
+          android:layout_alignTop="@+id/ingameStreakCounter"
+          android:background="@color/menu_buttons"
           android:onClick="onClick"
-          android:text="Menu" />
+          android:text="@string/ingame_MenuButton" />
 
       <Button
-          android:id="@+id/Jokers"
+          android:id="@+id/ingameJokerButton"
           style="?android:attr/buttonStyleSmall"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_alignTop="@+id/StreakCounter"
+          android:layout_alignTop="@+id/ingameStreakCounter"
           android:layout_marginRight="14dp"
-          android:layout_toLeftOf="@+id/Menu"
-          android:background="@color/smeshka"
+          android:layout_toLeftOf="@+id/ingameMenuButton"
+          android:background="@color/menu_buttons"
           android:onClick="onClick"
-          android:text="Jokers" />
+          android:text="@string/ingame_JokerButton" />
 
 </RelativeLayout>

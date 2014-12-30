@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class EndGame extends Activity {
 	Button saveButton, menuButton;
 	EditText recordName;
-	TextView lastQuestion, rightAnswer;
+	TextView lastQuestion;
 	Toast saveToast;
 	
 	Runnable r = new Runnable() {
@@ -35,18 +35,14 @@ public class EndGame extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.endgame);
 		
-		saveButton = (Button) findViewById (R.id.saveResult);
-		menuButton = (Button) findViewById (R.id.goToMenu);
-		recordName = (EditText) findViewById(R.id.recordName);
+		saveButton = (Button) findViewById (R.id.endgameSaveButton);
+		menuButton = (Button) findViewById (R.id.endgameMenuButton);
+		recordName = (EditText) findViewById(R.id.endgameRecordName);
 		lastQuestion = (TextView) findViewById(R.id.lastQuestion);
-		rightAnswer = (TextView) findViewById(R.id.rightAnswer);
-		saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 		
 		if (InGame.resumeFunctionality == 404){
 			lastQuestion.setText(InGame.getCurrentQuestion());
 			lastQuestion.setVisibility(View.VISIBLE);
-			rightAnswer.setText("The right answer was: " + InGame.getCurrentRightAnswer());
-			rightAnswer.setVisibility(View.VISIBLE);
 		}
 	}
 	
@@ -65,8 +61,9 @@ public class EndGame extends Activity {
 	}
 	
 	public void onClick(View v) {
+		saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 		switch(v.getId()) {
-			case R.id.saveResult:
+			case R.id.endgameSaveButton:
 				if (InGame.resumeFunctionality == 100) InGame.thisActivity.finish();
 				if (recordName.getText().toString().matches("")){
 					saveToast.setText("Can't save without name!");
@@ -85,7 +82,7 @@ public class EndGame extends Activity {
 					finish();
 				}
 				break;
-			case R.id.goToMenu:
+			case R.id.endgameMenuButton:
 				saveToast.setText("Result not saved");
 				saveToast.show();
 				InGame.thisActivity.finish();
