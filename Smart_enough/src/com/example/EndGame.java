@@ -64,7 +64,7 @@ public class EndGame extends Activity {
 		saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 		switch(v.getId()) {
 			case R.id.endgameSaveButton:
-				if (InGame.resumeFunctionality == 100) InGame.thisActivity.finish();
+				if (InGame.resumeFunctionality == 100) InGame.ingameActivity.finish();
 				if (recordName.getText().toString().matches("")){
 					saveToast.setText("Can't save without name!");
 					saveToast.show();
@@ -85,7 +85,7 @@ public class EndGame extends Activity {
 			case R.id.endgameMenuButton:
 				saveToast.setText("Result not saved");
 				saveToast.show();
-				InGame.thisActivity.finish();
+				InGame.ingameActivity.finish();
 				finish();
 				break;
 		}

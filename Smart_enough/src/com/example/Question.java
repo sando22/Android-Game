@@ -1,40 +1,37 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Question {
 	private String questionTitle;
 	private int correctAnswer;
 	private ArrayList<String> answerList = new ArrayList<String>();
 	
-	public Question(String q, int c, ArrayList<String> a) {
-		this.questionTitle = q;
-		this.correctAnswer = c;
-		this.answerList = a;
+	public Question(String question, ArrayList<String> answers) {
+		this.questionTitle = question;
+		this.answerList = answers;
 	}
 
 	public String getQuestionTitle() {
 		return questionTitle;
 	}
-
-	public void setQuestionTitle(String questionTitle) {
-		this.questionTitle = questionTitle;
-	}
-
-	public int getCorrectAnswer() {
+	
+	public int getCorrectAnswer(){
 		return correctAnswer;
-	}
-
-	public void setCorrectAnswer(int correctAnswer) {
-		this.correctAnswer = correctAnswer;
 	}
 
 	public ArrayList<String> getAnswerList() {
 		return answerList;
 	}
-
-	public void setAnswerList(ArrayList<String> answerList) {
-		this.answerList = answerList;
-	}
 	
+	public void shuffleAnswers(){
+		Collections.shuffle(answerList);
+		for (int i = 0; i < 4; i++) {
+			if (answerList.get(i).contains("+")){
+				correctAnswer = i;
+				answerList.set(i, answerList.get(i).substring(1));
+			}
+		}
+	}
 }

@@ -1,11 +1,6 @@
 package com.example;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.example.R;
 
@@ -13,30 +8,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class InGame extends Activity {
+	public static Activity ingameActivity;
+	public static int resumeFunctionality = 0, rightAnswersCounter;
+	public static Button answerButton1, answerButton2, answerButton3, answerButton4;
+	public static Question question;
 	
-	public static Activity thisActivity;
-	static int correctAnswer, resumeFunctionality = 0;
-	int linesCount=0;
-	static int rightAnswersCounter;
-	ArrayList<Integer> invalidNumbers = new ArrayList<Integer>();
-	static Button answerButton1;
-	static Button answerButton2;
-	static Button answerButton3;
-	static Button answerButton4;
-	TextView question, streakCounter;
-	static String wholeFile[];
-	AssetManager am;
-	static int questionIndex;
-	boolean correct = true;
-	static String[] answersToPreview = new String[4];
-	Random random = new Random();
-	Handler handler = new Handler(); 
+	private Handler handler = new Handler();
+	private QuestionManager questionManager = Menu.quesstionManager;
+	private TextView questionTextView, streakCounterTextView;
+	private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
 	
 	Runnable runRight = new Runnable() {
 		 public void run() { 
@@ -52,26 +37,6 @@ public class InGame extends Activity {
        } 
 	};
 	
-	Runnable readFile = new Runnable() {
-		public void run() {
-			int i = 0;
-			String line;
-			try {
-				am = getAssets();
-				InputStream is = am.open("file.txt");
-				InputStreamReader inputStreamReader = new InputStreamReader(is);
-				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-				while ((line=bufferedReader.readLine()) != null && i < linesCount){
-					wholeFile[i] = line;
-					i++;
-				}
-				bufferedReader.close();
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-	};
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,18 +45,16 @@ public class InGame extends Activity {
 		answerButton2 = (Button) findViewById (R.id.B);	
 		answerButton3 = (Button) findViewById (R.id.C);
 		answerButton4 = (Button) findViewById (R.id.D);
-		question = (TextView) findViewById(R.id.ingameQuestion);
-		streakCounter = (TextView) findViewById(R.id.ingameStreakCounter);
-		streakCounter.setText("Show your knowledge");
+		answerButtonsList.add(answerButton1);
+		answerButtonsList.add(answerButton2);
+		answerButtonsList.add(answerButton3);
+		answerButtonsList.add(answerButton4);
+		questionTextView = (TextView) findViewById(R.id.ingameQuestion);
+		streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
+		streakCounterTextView.setText("Alpha testing!");
 		rightAnswersCounter = 0;
-		try {
-			countLines();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		wholeFile = new String[linesCount];		
-		readFile.run();
-		thisActivity = this;
+		ingameActivity = this;
+		questionManager.generateQuestionList();
 	}
 	
 	protected void onResume() {
@@ -109,76 +72,19 @@ public class InGame extends Activity {
 	}
 	
 	protected void init(){
-		correctAnswer = 5;
-		
-		getNextQuestion();
-		
-		shuffleArray(answersToPreview);
-		
-		setButtonText();
+		question = questionManager.getNextQuestion();
+		setUiText();
 	}
 	
-	private void getNextQuestion(){
-		while (true){
-			questionIndex = random.nextInt(linesCount/5) *5;
-			if (invalidNumbers.contains(questionIndex)){
-				if (invalidNumbers.size() >= linesCount/5){
-					Intent myEndGameIntent = new Intent(InGame.this, EndGame.class);
-					InGame.this.startActivity(myEndGameIntent);
-					finish();
-					break;
-				}else continue;
-			}else{
-				question.setText(wholeFile[questionIndex]);
-				invalidNumbers.add(questionIndex);
-				for(int i=0;i<4;i++){
-					answersToPreview[i] = wholeFile[questionIndex + i + 1];
-				}
-				break;
-			}
-		}	
-	}
-	
-	private void shuffleArray(String[] answers2){
-	    for (int i = answers2.length - 1; i > 0; i--){
-	      int index = random.nextInt(i + 1);
-	      String a = answers2[index];
-	      answers2[index] = answers2[i];
-	      answers2[i] = a;
-	    }
-	 }
-
-	private void setButtonText(){
-		for(int i=0;i<4;i++){
-			if (answersToPreview[i].contains("+")){
-				answersToPreview[i] = answersToPreview[i].substring(1);
-				correctAnswer = i;
-			}
-			switch (i){
-				case 0:
-					answerButton1.setText(answersToPreview[i]);
-				case 1:
-					answerButton2.setText(answersToPreview[i]);
-				case 2:
-					answerButton3.setText(answersToPreview[i]);
-				case 3:
-					answerButton4.setText(answersToPreview[i]);
-			}
-			answerButton1.setEnabled(true);
-			answerButton2.setEnabled(true);
-			answerButton3.setEnabled(true);
-			answerButton4.setEnabled(true);
+	private void setUiText(){
+		int i = 0;
+		questionTextView.setText(question.getQuestionTitle());
+		ArrayList<String> answerList = question.getAnswerList();
+		for (Button button : answerButtonsList) {
+			button.setText(answerList.get(i));
+			i++;
+			button.setEnabled(true);
 		}
-	}
-	
-	private void countLines() throws IOException {
-		am = getAssets();
-		InputStream is = am.open("file.txt");
-		InputStreamReader inputStreamReader = new InputStreamReader(is);
-		BufferedReader reader = new BufferedReader(inputStreamReader);
-		linesCount = 0;
-		while (reader.readLine() != null) linesCount++;
-		reader.close();
 	}
 	
 	@Override
@@ -191,12 +97,12 @@ public class InGame extends Activity {
 	public void onClick(View v) throws InterruptedException {
 		switch(v.getId()) {
 	        case R.id.A:
-	        	if (correctAnswer == 0){
+	        	if (question.getCorrectAnswer() == 0){
 	        		answerButton1.setBackgroundResource(R.color.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounter.setText("Streak of " + String.valueOf(rightAnswersCounter));
+	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
 	        		answerButton1.setBackgroundResource(R.color.ingame_answered_wrong);
 	        		setUnclickableButtons();
@@ -204,12 +110,12 @@ public class InGame extends Activity {
 	        	}
 	        	break;
 	        case R.id.B:
-	        	if (correctAnswer == 1){
+	        	if (question.getCorrectAnswer() == 1){
 	        		answerButton2.setBackgroundResource(R.color.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounter.setText("Streak of " + String.valueOf(rightAnswersCounter));
+	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
 	        		answerButton2.setBackgroundResource(R.color.ingame_answered_wrong);
 	        		setUnclickableButtons();
@@ -217,12 +123,12 @@ public class InGame extends Activity {
 	        	}
 	        	break;
 	        case R.id.C:
-	        	if (correctAnswer == 2){
+	        	if (question.getCorrectAnswer() == 2){
 	        		answerButton3.setBackgroundResource(R.color.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounter.setText("Streak of " + String.valueOf(rightAnswersCounter));
+	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
 	        		answerButton3.setBackgroundResource(R.color.ingame_answered_wrong);
 	        		setUnclickableButtons();
@@ -230,12 +136,12 @@ public class InGame extends Activity {
 	        	}
 	        	break;
 	        case R.id.D:
-	        	if (correctAnswer == 3){
+	        	if (question.getCorrectAnswer() == 3){
 	        		answerButton4.setBackgroundResource(R.color.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounter.setText("Streak of " + String.valueOf(rightAnswersCounter));
+	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
 	        		answerButton4.setBackgroundResource(R.color.ingame_answered_wrong);
 	        		setUnclickableButtons();
@@ -266,33 +172,28 @@ public class InGame extends Activity {
 	}
 	
 	public static String getCurrentQuestion(){
-		return wholeFile[questionIndex];		
+		return question.getQuestionTitle();		
 	}
 	
 	public static String getCurrentRightAnswer(){
-		return answersToPreview[correctAnswer];
+		return question.getAnswerList().get(question.getCorrectAnswer());
 	}
 	
 	public static int getCurrentRightAnswerNumber(){
-		return correctAnswer;
+		return question.getCorrectAnswer();
 	}
 	
 	private void setDefaultButton(){
-		answerButton1.setBackgroundResource(R.color.ingame_answer);
-		answerButton2.setBackgroundResource(R.color.ingame_answer);
-		answerButton3.setBackgroundResource(R.color.ingame_answer);
-		answerButton4.setBackgroundResource(R.color.ingame_answer);
-		answerButton1.setClickable(true);
-		answerButton2.setClickable(true);
-		answerButton3.setClickable(true);
-		answerButton4.setClickable(true);
+		for (Button button : answerButtonsList) {
+			button.setBackgroundResource(R.color.ingame_answer);
+			button.setClickable(true);
+		}
 	}
 	
 	private void setUnclickableButtons(){
-		answerButton1.setClickable(false);
-		answerButton2.setClickable(false);
-		answerButton3.setClickable(false);
-		answerButton4.setClickable(false);
+		for (Button button : answerButtonsList) {
+			button.setClickable(false);
+		}
 	}
 	
 }
