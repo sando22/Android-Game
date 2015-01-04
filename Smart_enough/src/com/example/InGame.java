@@ -22,20 +22,23 @@ public class InGame extends Activity {
 	private QuestionManager questionManager = Menu.quesstionManager;
 	private TextView questionTextView, streakCounterTextView;
 	private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
+	private Button jokerButton, homeButton;
 	
-	Runnable runRight = new Runnable() {
-		 public void run() { 
-             init();
-			 setDefaultButton();
-        } 
-	};
+	public static String getCurrentQuestion(){
+		return question.getQuestionTitle();		
+	}
 	
-	Runnable runWrong = new Runnable() {
-		 public void run() { 
-			 goToAnsweredWrong();
-			 setDefaultButton();
-       } 
-	};
+	public static String getCurrentRightAnswer(){
+		return question.getAnswerList().get(question.getCorrectAnswer());
+	}
+	
+	public static int getRightAnswersCounter() {
+		return rightAnswersCounter;
+	}
+	
+	public static int getCurrentRightAnswerNumber(){
+		return question.getCorrectAnswer();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +54,19 @@ public class InGame extends Activity {
 		answerButtonsList.add(answerButton4);
 		questionTextView = (TextView) findViewById(R.id.ingameQuestion);
 		streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
+		jokerButton = (Button) findViewById(R.id.ingameJokerButton);
+		homeButton = (Button) findViewById(R.id.ingameMenuButton);
 		streakCounterTextView.setText("Alpha testing!");
 		rightAnswersCounter = 0;
 		ingameActivity = this;
 		questionManager.generateQuestionList();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent myMenuIntent = new Intent(InGame.this, EndGame.class);
+		InGame.this.startActivity(myMenuIntent);
+		resumeFunctionality = 100;
 	}
 	
 	protected void onResume() {
@@ -72,8 +84,14 @@ public class InGame extends Activity {
 	}
 	
 	protected void init(){
-		question = questionManager.getNextQuestion();
-		setUiText();
+		if (questionManager.hasMoreQuestions()){
+			question = questionManager.getNextQuestion();
+			setUiText();
+		} else{
+			Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
+			InGame.this.startActivity(myEndgameIntent);
+			resumeFunctionality = 100;
+		}
 	}
 	
 	private void setUiText(){
@@ -85,13 +103,6 @@ public class InGame extends Activity {
 			i++;
 			button.setEnabled(true);
 		}
-	}
-	
-	@Override
-	public void onBackPressed() {
-		Intent myMenuIntent = new Intent(InGame.this, EndGame.class);
-		InGame.this.startActivity(myMenuIntent);
-		resumeFunctionality = 100;
 	}
 	
 	public void onClick(View v) throws InterruptedException {
@@ -153,8 +164,8 @@ public class InGame extends Activity {
 				InGame.this.startActivity(myJokerIntent);
 	        	break;
 	        case R.id.ingameMenuButton:
-	        	Intent myMenuIntent = new Intent(InGame.this, EndGame.class);
-				InGame.this.startActivity(myMenuIntent);
+	        	Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
+				InGame.this.startActivity(myEndgameIntent);
 				resumeFunctionality = 100;
 				break;
 		}
@@ -167,33 +178,35 @@ public class InGame extends Activity {
 		finish();
 	}
 
-	public static int getRightAnswersCounter() {
-		return rightAnswersCounter;
-	}
+	Runnable runRight = new Runnable() {
+		 public void run() { 
+            init();
+			setDefaultButton();
+       } 
+	};
 	
-	public static String getCurrentQuestion(){
-		return question.getQuestionTitle();		
-	}
-	
-	public static String getCurrentRightAnswer(){
-		return question.getAnswerList().get(question.getCorrectAnswer());
-	}
-	
-	public static int getCurrentRightAnswerNumber(){
-		return question.getCorrectAnswer();
-	}
+	Runnable runWrong = new Runnable() {
+		 public void run() { 
+			 goToAnsweredWrong();
+			 setDefaultButton();
+      } 
+	};
 	
 	private void setDefaultButton(){
 		for (Button button : answerButtonsList) {
 			button.setBackgroundResource(R.color.ingame_answer);
 			button.setClickable(true);
 		}
+		jokerButton.setClickable(true);
+		homeButton.setClickable(true);
 	}
 	
 	private void setUnclickableButtons(){
 		for (Button button : answerButtonsList) {
 			button.setClickable(false);
 		}
+		jokerButton.setClickable(false);
+		homeButton.setClickable(false);
 	}
 	
 }

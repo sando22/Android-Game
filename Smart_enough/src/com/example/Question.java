@@ -26,12 +26,23 @@ public class Question {
 	}
 	
 	public void shuffleAnswers(){
-		Collections.shuffle(answerList);
-		for (int i = 0; i < 4; i++) {
-			if (answerList.get(i).contains("+")){
-				correctAnswer = i;
-				answerList.set(i, answerList.get(i).substring(1));
+		Thread shuffleThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Collections.shuffle(answerList);
+				for (int i = 0; i < 4; i++) {
+					if (answerList.get(i).contains("+")){
+						correctAnswer = i;
+						answerList.set(i, answerList.get(i).substring(1));
+					}
+				}
 			}
+		});
+		shuffleThread.start();
+		try {
+			shuffleThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 }

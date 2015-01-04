@@ -10,21 +10,37 @@ public class QuestionManager {
 	private String[] wholeFile;
 	
 	public void generateQuestionList(){
-		int startingLine = 0;
-		if (!questionList.isEmpty()){
-			questionList.clear();
-		}
-		if (wholeFile == null){
-			wholeFile = fileManager.readQuestionFile();
-		}
-		while (startingLine < wholeFile.length){
-			questionList.add(createQuestion(startingLine));
-			startingLine += 5;
+		Thread generateQuestionThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int startingLine = 0;
+				if (!questionList.isEmpty()){
+					questionList.clear();
+				}
+				if (wholeFile == null){
+					wholeFile = fileManager.readQuestionFile();
+				}
+				while (startingLine < wholeFile.length){
+					questionList.add(createQuestion(startingLine));
+					startingLine += 5;
+				}
+			}
+		});
+		generateQuestionThread.start();
+		try {
+			generateQuestionThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	public Question getNextQuestion(){
-		int currentRandomPick = random.nextInt(questionList.size() - 1);
+		int currentRandomPick;
+		if (questionList.size() > 1){
+			currentRandomPick = random.nextInt(questionList.size() - 1);
+		} else {
+			currentRandomPick = 0;
+		}
 		Question nextQuestion = questionList.get(currentRandomPick);
 		questionList.remove(currentRandomPick);
 		nextQuestion.shuffleAnswers();

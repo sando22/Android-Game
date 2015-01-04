@@ -23,54 +23,81 @@ public class FileManager {
 	}
 	
 	public String[] readQuestionFile() {
-		String line;
-		try {
-			assetManager = context.getAssets();
-			InputStream inputStream = assetManager.open(context.getString(R.string.filemanager_QuestionFile));
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			while ((line = bufferedReader.readLine()) != null){
-				wholeFileList.add(line);
+		Thread readQuestionsThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String line;
+				try {
+					assetManager = context.getAssets();
+					InputStream inputStream = assetManager.open(context.getString(R.string.filemanager_QuestionFile));
+					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+					while ((line = bufferedReader.readLine()) != null){
+						wholeFileList.add(line);
+					}
+					bufferedReader.close();
+				} catch (Exception e) {
+					Log.e("login activity", e.toString());
+				}
 			}
-			bufferedReader.close();
-		} catch (Exception e) {
-			Log.e("login activity", e.toString());
+		});
+		readQuestionsThread.start();
+		try {
+			readQuestionsThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		return wholeFileList.toArray(new String[wholeFileList.size()]);
 	}
 	
-	private ArrayList<String> readScoreFile() {
-		ArrayList<String> arrayListScores = new ArrayList<String>();
-		String output;
-		try {
-			InputStream inputStream = context.openFileInput(context.getString(R.string.filemanager_ScoresFile));
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			while ((output = bufferedReader.readLine()) != null){
-				arrayListScores.add(output);
+	public ArrayList<String> readScoreFile() {
+		final ArrayList<String> arrayListScores = new ArrayList<String>();
+		Thread readScoreThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String output;
+				try {
+					InputStream inputStream = context.openFileInput(context.getString(R.string.filemanager_ScoresFile));
+					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+					while ((output = bufferedReader.readLine()) != null){
+						arrayListScores.add(output);
+					}
+					bufferedReader.close();
+				} catch (FileNotFoundException e) {
+			        Log.e("login activity", "File not found: " + e.toString());
+			    } catch (IOException e) {
+			        Log.e("login activity", "Can not read file: " + e.toString());
+				}
+				
 			}
-			bufferedReader.close();
-		} catch (FileNotFoundException e) {
-	        Log.e("login activity", "File not found: " + e.toString());
-	    } catch (IOException e) {
-	        Log.e("login activity", "Can not read file: " + e.toString());
+		});
+		readScoreThread.start();
+		try {
+			readScoreThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		return arrayListScores;
 	}
 	
-	private void writeScoreFile(String data) {
-	    try {
-	    	FileOutputStream fileOutputStream = context.openFileOutput(
-	    			context.getString(R.string.filemanager_ScoresFile),
-	    			Context.MODE_APPEND
-	    	);
-	        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-	        outputStreamWriter.write(data);
-	        outputStreamWriter.append("\n");
-	        outputStreamWriter.close();
-	    }
-	    catch (IOException e) {
-	    	e.printStackTrace();
-	    } 
+	public void writeScoreFile(final String data) {
+		new Thread(new Runnable() {
+			@Override
+			public void run(){
+				try {
+			    	FileOutputStream fileOutputStream = context.openFileOutput(
+			    			context.getString(R.string.filemanager_ScoresFile),
+			    			Context.MODE_APPEND
+			    	);
+			        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+			        outputStreamWriter.write(data + "\n");
+			        outputStreamWriter.close();
+			    }
+			    catch (IOException e) {
+			    	e.printStackTrace();
+			    } 
+			}
+		}).start();
 	}
 }
