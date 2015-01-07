@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/highscoreDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/menu_buttons"
+        android:background="@drawable/highscore_reset_button"
         android:onClick="onClick"
         android:textSize="15sp"
         android:text="@string/highscore_DeleteButton"
-        android:layout_margin="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:textColor="#FFFFFF"
+        android:layout_gravity="end"
+        android:layout_margin="10dp" />
 
     <TextView
         android:id="@+id/highscoreScoreText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="39dp"
-        android:ellipsize="end"
         android:gravity="center"
         android:hint="@string/highscore_ScoreText"
         android:lineSpacingMultiplier="1.2"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF" />
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -30,7 +30,7 @@
         android:layout_below="@+id/endgameSaveButton"
         android:layout_marginTop="20dp"
         android:onClick="onClick"
-        android:background="@color/menu_buttons"
+        android:background="@drawable/menu_buttons"
         android:text="@string/endgame_MenuButton" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="14dp"
         android:onClick="onClick"
-        android:background="@color/menu_buttons"
+        android:background="@drawable/menu_buttons"
         android:text="@string/endgame_SaveButton" />
 
 </RelativeLayout>

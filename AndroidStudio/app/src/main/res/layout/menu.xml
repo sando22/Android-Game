@@ -5,37 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/menuStartButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/menuScoresButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp"
-        android:onClick="onClick"
-        android:text="@string/menu_StartButton"
-        android:background="@color/menu_buttons"
-        android:textSize="20sp" />
-
     <ImageView
         android:id="@+id/menuImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/menuStartButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp"
         android:src="@drawable/main_logo" />
 
-    <Button
-        android:id="@+id/menuScoresButton"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="66dp"
-        android:background="@color/menu_buttons"
-        android:onClick="onClick"
-        android:text="@string/menu_ScoreButton"
-        android:textSize="20sp" />
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/menuStartButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:onClick="onClick"
+            android:text="@string/menu_StartButton"
+            android:background="@drawable/menu_buttons"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/menuScoresButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/menu_buttons"
+            android:onClick="onClick"
+            android:text="@string/menu_ScoreButton"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/menuBetaButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/menu_buttons"
+            android:onClick="onClick"
+            android:text="beta"
+            android:visibility="invisible"
+            android:textSize="20sp" />
+
+        </LinearLayout>
 
 </RelativeLayout>

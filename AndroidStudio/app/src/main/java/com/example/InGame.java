@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class InGame extends Activity {
@@ -21,6 +22,7 @@ public class InGame extends Activity {
 	private TextView questionTextView, streakCounterTextView;
 	private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
 	private Button jokerButton, homeButton;
+    private ProgressBar resultProgressBar;
 	
 	public static String getCurrentQuestion(){
 		return question.getQuestionTitle();		
@@ -54,6 +56,7 @@ public class InGame extends Activity {
 		streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
 		jokerButton = (Button) findViewById(R.id.ingameJokerButton);
 		homeButton = (Button) findViewById(R.id.ingameMenuButton);
+        resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
 		streakCounterTextView.setText("Alpha testing!");
 		rightAnswersCounter = 0;
 		ingameActivity = this;
@@ -82,7 +85,7 @@ public class InGame extends Activity {
 	}
 	
 	protected void init(){
-		if (questionManager.hasMoreQuestions()){
+		if (questionManager.hasMoreQuestions() && rightAnswersCounter < 30){
 			question = questionManager.getNextQuestion();
 			setUiText();
 		} else{
@@ -99,6 +102,7 @@ public class InGame extends Activity {
 		for (Button button : answerButtonsList) {
 			button.setText(answerList.get(i));
 			i++;
+            resultProgressBar.setProgress(rightAnswersCounter);
 			button.setEnabled(true);
 		}
 	}
@@ -107,52 +111,48 @@ public class InGame extends Activity {
 		switch(v.getId()) {
 	        case R.id.A:
 	        	if (question.getCorrectAnswer() == 0){
-	        		answerButton1.setBackgroundResource(R.color.ingame_answered_right);
+	        		answerButton1.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
-	        		answerButton1.setBackgroundResource(R.color.ingame_answered_wrong);
+	        		answerButton1.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runWrong, 500);
 	        	}
 	        	break;
 	        case R.id.B:
 	        	if (question.getCorrectAnswer() == 1){
-	        		answerButton2.setBackgroundResource(R.color.ingame_answered_right);
+	        		answerButton2.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
-	        		answerButton2.setBackgroundResource(R.color.ingame_answered_wrong);
+	        		answerButton2.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runWrong, 500);
 	        	}
 	        	break;
 	        case R.id.C:
 	        	if (question.getCorrectAnswer() == 2){
-	        		answerButton3.setBackgroundResource(R.color.ingame_answered_right);
+	        		answerButton3.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
-	        		answerButton3.setBackgroundResource(R.color.ingame_answered_wrong);
+	        		answerButton3.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runWrong, 500);
 	        	}
 	        	break;
 	        case R.id.D:
 	        	if (question.getCorrectAnswer() == 3){
-	        		answerButton4.setBackgroundResource(R.color.ingame_answered_right);
+	        		answerButton4.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runRight, 500);
 	        		rightAnswersCounter++;
-	        		streakCounterTextView.setText("Streak of " + String.valueOf(rightAnswersCounter));
 	        	}else{
-	        		answerButton4.setBackgroundResource(R.color.ingame_answered_wrong);
+	        		answerButton4.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
 	        		handler.postDelayed(runWrong, 500);
 	        	}
@@ -168,7 +168,7 @@ public class InGame extends Activity {
 				break;
 		}
 	}
-	
+
 	void goToAnsweredWrong(){
 		Intent myAnsweredWrongIntent = new Intent(InGame.this, EndGame.class);
 		InGame.this.startActivity(myAnsweredWrongIntent);
@@ -192,7 +192,7 @@ public class InGame extends Activity {
 	
 	private void setDefaultButton(){
 		for (Button button : answerButtonsList) {
-			button.setBackgroundResource(R.color.ingame_answer);
+			button.setBackgroundResource(R.drawable.ingame_answer);
 			button.setClickable(true);
 		}
 		jokerButton.setClickable(true);
