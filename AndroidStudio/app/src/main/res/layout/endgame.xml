@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+
+
+    <EditText
+        android:id="@+id/endgameRecordName"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="26dp"
+        android:hint="@string/endgame_RecordName"
+        android:textColor="#FFFFFF"
+        android:inputType="textPersonName"
+        android:ems="10" >
+
+        <requestFocus android:layout_width="wrap_content" />
+
+    </EditText>
+
+    <Button
+        android:id="@+id/endgameMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/endgameSaveButton"
+        android:layout_below="@+id/endgameSaveButton"
+        android:layout_marginTop="20dp"
+        android:onClick="onClick"
+        android:background="@color/menu_buttons"
+        android:text="@string/endgame_MenuButton" />
+
+    <TextView
+        android:id="@+id/lastQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/endgameRecordName"
+        android:layout_below="@+id/endgameMenuButton"
+        android:layout_marginTop="60dp"
+        android:textColor="#FFFFFF"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/endgameSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/endgameRecordName"
+        android:layout_alignBottom="@+id/endgameRecordName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:onClick="onClick"
+        android:background="@color/menu_buttons"
+        android:text="@string/endgame_SaveButton" />
+
+</RelativeLayout>

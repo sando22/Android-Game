@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#000000"
+    tools:context=".XmlMainActivity" >
+
+    <TextView
+        android:id="@+id/ingameQuestion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="46dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/ingameStreakCounter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ingameQuestion"
+        android:layout_alignParentTop="true"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/D"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/C"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClick"
+        android:background="@color/ingame_answer"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/C"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/D"
+        android:layout_alignLeft="@+id/B"
+        android:onClick="onClick"
+        android:background="@color/ingame_answer"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/B"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/C"
+        android:layout_alignLeft="@+id/A"
+        android:onClick="onClick"
+        android:background="@color/ingame_answer"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/A"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/B"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text=""
+        android:background="@color/ingame_answer"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/ingameMenuButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ingameStreakCounter"
+        android:background="@color/menu_buttons"
+        android:onClick="onClick"
+        android:text="@string/ingame_MenuButton" />
+
+    <Button
+        android:id="@+id/ingameJokerButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ingameStreakCounter"
+        android:layout_marginRight="14dp"
+        android:layout_toLeftOf="@+id/ingameMenuButton"
+        android:background="@color/menu_buttons"
+        android:onClick="onClick"
+        android:text="@string/ingame_JokerButton" />
+
+</RelativeLayout>
