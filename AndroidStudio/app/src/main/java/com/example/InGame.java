@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,7 +22,8 @@ public class InGame extends Activity {
 	private QuestionManager questionManager = Menu.quesstionManager;
 	private TextView questionTextView, streakCounterTextView;
 	private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
-	private Button jokerButton, homeButton;
+	private Button jokerButton;
+    private ImageButton homeButton;
     private ProgressBar resultProgressBar;
 	
 	public static String getCurrentQuestion(){
@@ -55,7 +57,7 @@ public class InGame extends Activity {
 		questionTextView = (TextView) findViewById(R.id.ingameQuestion);
 		streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
 		jokerButton = (Button) findViewById(R.id.ingameJokerButton);
-		homeButton = (Button) findViewById(R.id.ingameMenuButton);
+		homeButton = (ImageButton) findViewById(R.id.ingameMenuButton);
         resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
 		streakCounterTextView.setText("Alpha testing!");
 		rightAnswersCounter = 0;

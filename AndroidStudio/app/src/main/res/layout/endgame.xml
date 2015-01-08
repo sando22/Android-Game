@@ -22,15 +22,15 @@
 
     </EditText>
 
-    <Button
+    <ImageButton
         android:id="@+id/endgameMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/endgameSaveButton"
         android:layout_below="@+id/endgameSaveButton"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
         android:onClick="onClick"
-        android:background="@drawable/menu_buttons"
+        android:background="@drawable/home_button"
         android:text="@string/endgame_MenuButton" />
 
     <TextView

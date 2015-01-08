@@ -16,5 +16,6 @@
     <string name="filemanager_ScoresFile">scores.txt</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="homebutton_description">home button</string>
 
 </resources>
