@@ -10,34 +10,21 @@
     tools:context=".XmlMainActivity" >
 
     <ImageButton
-        android:id="@+id/ingameMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ingameStreakCounter"
-        android:background="@drawable/home_button"
-        android:onClick="onClick"
-        android:text="@string/ingame_MenuButton"
-        android:contentDescription="@string/homebutton_description"/>
-
-    <Button
         android:id="@+id/ingameJokerButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ingameStreakCounter"
-        android:layout_marginRight="14dp"
-        android:layout_toLeftOf="@+id/ingameMenuButton"
-        android:background="@drawable/menu_buttons"
-        android:onClick="onClick"
-        android:text="@string/ingame_JokerButton" />
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ingame_joker_button"
+        android:onClick="onClick" />
 
     <TextView
         android:id="@+id/ingameQuestion"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/ingameMenuButton"
+        android:layout_below="@id/ingameJokerButton"
         android:layout_marginTop="10dp"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />

@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="26dp"
+        android:layout_margin="25dp"
         android:hint="@string/endgame_RecordName"
         android:textColor="#FFFFFF"
         android:inputType="textPersonName"
@@ -38,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/endgameRecordName"
-        android:layout_marginTop="190dp"
-        android:layout_marginLeft="25dp"
+        android:layout_margin="25dp"
+        android:layout_marginTop="0dp"
         android:textColor="#FFFFFF"
         android:visibility="gone" />
 
@@ -49,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/lastQuestion"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="25dp"
+        android:layout_margin="25dp"
+        android:layout_marginTop="0dp"
         android:textColor="#FFFFFF"
         android:visibility="gone" />
 

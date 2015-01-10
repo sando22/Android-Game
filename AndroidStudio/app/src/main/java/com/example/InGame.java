@@ -22,8 +22,7 @@ public class InGame extends Activity {
 	private QuestionManager questionManager = Menu.quesstionManager;
 	private TextView questionTextView, streakCounterTextView;
 	private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
-	private Button jokerButton;
-    private ImageButton homeButton;
+	private ImageButton jokerButton;
     private ProgressBar resultProgressBar;
 	
 	public static String getCurrentQuestion(){
@@ -56,8 +55,7 @@ public class InGame extends Activity {
 		answerButtonsList.add(answerButton4);
 		questionTextView = (TextView) findViewById(R.id.ingameQuestion);
 		streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
-		jokerButton = (Button) findViewById(R.id.ingameJokerButton);
-		homeButton = (ImageButton) findViewById(R.id.ingameMenuButton);
+		jokerButton = (ImageButton) findViewById(R.id.ingameJokerButton);
         resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
 		streakCounterTextView.setText("Alpha testing!");
 		rightAnswersCounter = 0;
@@ -67,9 +65,9 @@ public class InGame extends Activity {
 	
 	@Override
 	public void onBackPressed() {
-		Intent myMenuIntent = new Intent(InGame.this, EndGame.class);
-		InGame.this.startActivity(myMenuIntent);
-		resumeFunctionality = 100;
+        Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
+        InGame.this.startActivity(myEndgameIntent);
+        resumeFunctionality = 100;
 	}
 	
 	protected void onResume() {
@@ -163,11 +161,6 @@ public class InGame extends Activity {
 	        	Intent myJokerIntent = new Intent(InGame.this, Jokers.class);
 				InGame.this.startActivity(myJokerIntent);
 	        	break;
-	        case R.id.ingameMenuButton:
-	        	Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
-				InGame.this.startActivity(myEndgameIntent);
-				resumeFunctionality = 100;
-				break;
 		}
 	}
 
@@ -198,7 +191,6 @@ public class InGame extends Activity {
 			button.setClickable(true);
 		}
 		jokerButton.setClickable(true);
-		homeButton.setClickable(true);
 	}
 	
 	private void setUnclickableButtons(){
@@ -206,7 +198,6 @@ public class InGame extends Activity {
 			button.setClickable(false);
 		}
 		jokerButton.setClickable(false);
-		homeButton.setClickable(false);
 	}
 	
 }
