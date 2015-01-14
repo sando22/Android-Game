@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class InGame extends Activity {
 	public static Activity ingameActivity;
-	public static int resumeFunctionality = 0, rightAnswersCounter;
+	public static int resumeFunctionality = 0, rightAnswersCounter = 0;
 	public static Button answerButton1, answerButton2, answerButton3, answerButton4;
 	public static Question question;
 	
@@ -58,11 +58,12 @@ public class InGame extends Activity {
 		jokerButton = (ImageButton) findViewById(R.id.ingameJokerButton);
         resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
 		streakCounterTextView.setText("Alpha testing!");
-		rightAnswersCounter = 0;
 		ingameActivity = this;
 		questionManager.generateQuestionList();
 	}
-	
+
+
+
 	@Override
 	public void onBackPressed() {
         Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
@@ -113,48 +114,48 @@ public class InGame extends Activity {
 	        	if (question.getCorrectAnswer() == 0){
 	        		answerButton1.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runRight, 500);
+	        		handler.postDelayed(runRight, 750);
 	        		rightAnswersCounter++;
 	        	}else{
 	        		answerButton1.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runWrong, 500);
+	        		handler.postDelayed(runWrong, 750);
 	        	}
 	        	break;
 	        case R.id.B:
 	        	if (question.getCorrectAnswer() == 1){
 	        		answerButton2.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runRight, 500);
+	        		handler.postDelayed(runRight, 750);
 	        		rightAnswersCounter++;
 	        	}else{
 	        		answerButton2.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runWrong, 500);
+	        		handler.postDelayed(runWrong, 750);
 	        	}
 	        	break;
 	        case R.id.C:
 	        	if (question.getCorrectAnswer() == 2){
 	        		answerButton3.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runRight, 500);
+	        		handler.postDelayed(runRight, 750);
 	        		rightAnswersCounter++;
 	        	}else{
 	        		answerButton3.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runWrong, 500);
+	        		handler.postDelayed(runWrong, 750);
 	        	}
 	        	break;
 	        case R.id.D:
 	        	if (question.getCorrectAnswer() == 3){
 	        		answerButton4.setBackgroundResource(R.drawable.ingame_answered_right);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runRight, 500);
+	        		handler.postDelayed(runRight, 750);
 	        		rightAnswersCounter++;
 	        	}else{
 	        		answerButton4.setBackgroundResource(R.drawable.ingame_answered_wrong);
 	        		setUnclickableButtons();
-	        		handler.postDelayed(runWrong, 500);
+	        		handler.postDelayed(runWrong, 750);
 	        	}
 	        	break;
 	        case R.id.ingameJokerButton:
@@ -199,5 +200,7 @@ public class InGame extends Activity {
 		}
 		jokerButton.setClickable(false);
 	}
+
+    //TODO trea da go opravq kato se vurti
 	
 }
