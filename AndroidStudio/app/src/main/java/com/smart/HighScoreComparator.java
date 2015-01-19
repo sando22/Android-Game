@@ -1,4 +1,4 @@
-package com.example;
+package com.smart;
 
 import java.util.Comparator;
 

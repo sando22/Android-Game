@@ -1,4 +1,4 @@
-package com.example;
+package com.smart;
 
 import java.util.ArrayList;
 
@@ -68,9 +68,9 @@ public class InGame extends Activity {
 	public void onBackPressed() {
         Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
         InGame.this.startActivity(myEndgameIntent);
-        resumeFunctionality = 100;
 	}
-	
+
+    @Override
 	protected void onResume() {
 		super.onResume();
 		if (resumeFunctionality == 0){
@@ -78,10 +78,12 @@ public class InGame extends Activity {
 			resumeFunctionality++;
 		}
 	}
-	
+
+    @Override
 	protected void onDestroy(){
 		super.onDestroy();
 		resumeFunctionality = 0;
+        rightAnswersCounter = 0;
 		for (int i=0;i<3;i++) Jokers.usedJokers[i] = 0;
 	}
 	
@@ -92,7 +94,6 @@ public class InGame extends Activity {
 		} else{
 			Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
 			InGame.this.startActivity(myEndgameIntent);
-			resumeFunctionality = 100;
 		}
 	}
 	
