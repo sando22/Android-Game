@@ -8,23 +8,21 @@
         android:id="@+id/highscoreDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
         android:background="@drawable/highscore_reset_button"
         android:onClick="onClick"
-        android:textSize="15sp"
         android:text="@string/highscore_DeleteButton"
-        android:textColor="#FFFFFF"
-        android:layout_gravity="end"
-        android:layout_margin="10dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/highscoreScoreText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:hint="@string/highscore_ScoreText"
         android:lineSpacingMultiplier="1.2"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

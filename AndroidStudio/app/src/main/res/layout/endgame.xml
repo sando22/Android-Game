@@ -12,10 +12,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="26dp"
+        android:ems="10"
         android:hint="@string/endgame_RecordName"
-        android:textColor="#FFFFFF"
-        android:inputType="textPersonName"
-        android:ems="10" >
+        android:inputType="textPersonName" >
 
         <requestFocus android:layout_width="wrap_content" />
 
@@ -25,11 +24,11 @@
         android:id="@+id/endgameMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/endgameSaveButton"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/endgameSaveButton"
         android:layout_margin="20dp"
-        android:onClick="onClick"
-        android:background="@drawable/home_button" />
+        android:background="@drawable/home_button"
+        android:onClick="onClick" />
 
     <TextView
         android:id="@+id/lastQuestion"
@@ -37,9 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/endgameRecordName"
-        android:layout_marginTop="190dp"
         android:layout_marginLeft="25dp"
-        android:textColor="#FFFFFF"
+        android:layout_marginTop="190dp"
         android:visibility="gone" />
 
     <TextView
@@ -48,20 +46,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/lastQuestion"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="25dp"
-        android:textColor="#FFFFFF"
+        android:layout_marginTop="60dp"
         android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/endgameSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
         android:layout_marginRight="20dp"
-        android:onClick="onClick"
-        android:background="@drawable/endgame_save_button" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/endgame_save_button"
+        android:onClick="onClick" />
 
 </RelativeLayout>

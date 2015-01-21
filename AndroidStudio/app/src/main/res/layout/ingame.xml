@@ -6,15 +6,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".XmlMainActivity" >
+    tools:context=".XmlMainActivity">
 
     <ImageButton
         android:id="@+id/ingameJokerButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ingameStreakCounter"
         android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ingameStreakCounter"
         android:background="@drawable/ingame_joker_button"
         android:onClick="onClick" />
 
@@ -25,70 +25,84 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/ingameJokerButton"
         android:layout_marginTop="10dp"
-        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/ingameStreakCounter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:textColor="#FFFFFF"
+        android:layout_alignParentTop="true"
         android:textSize="15sp" />
 
     <LinearLayout
+        android:id="@+id/answersLinearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ProgressBar
+            android:id="@+id/resultProgressBar"
             style="@style/StreakProgressBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:max="30"
-            android:id="@+id/resultProgressBar"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:max="30" />
 
         <Button
             android:id="@+id/D"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
+            android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:textSize="20sp"
-            android:layout_margin="5dp" />
+            android:onClick="onClick"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/C"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
+            android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:textSize="20sp"
-            android:layout_margin="5dp"/>
+            android:onClick="onClick"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/B"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
+            android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:textSize="20sp"
-            android:layout_margin="5dp"/>
+            android:onClick="onClick"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/A"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
+            android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:textSize="20sp"
-            android:layout_margin="5dp"/>
+            android:onClick="onClick"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/answersLinearLayout"
+        android:layout_alignTop="@id/ingameQuestion"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TUKA TREAE DA E FRagmentoo" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -12,12 +12,13 @@
         -->
     </style>
 
-    <color name="app_bg_color">#000000</color>
+    <color name="materialDarkColor">#ff303030</color>
 
     <!-- Application theme. -->
     <style name="AppNoTitleTheme" parent="AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/app_bg_color</item>
+        <item name="android:windowBackground">@color/materialDarkColor</item>
+        <item name="android:textColor">#ffffffff</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
