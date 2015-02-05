@@ -13,6 +13,8 @@
     </style>
 
     <color name="materialDarkColor">#ff303030</color>
+    <color name="contrastToBackgroundColor">#ffa4c161</color>
+    <color name="audienceToastTextColor">#ff000000</color>
 
     <!-- Application theme. -->
     <style name="AppNoTitleTheme" parent="AppBaseTheme">

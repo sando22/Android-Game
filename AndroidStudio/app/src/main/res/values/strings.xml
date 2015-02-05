@@ -14,5 +14,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="homebutton_description">home button</string>
     <string name="menu_OnlineButton">beta</string>
+    <string name="audience_toast">Звездите ти казаха</string>
+    <string name="fifty_joker_text">50/50</string>
+    <string name="change_joker_text">махни тоя въпрос</string>
+    <string name="audience_joker_text">попитай ✦★✦</string>
 
 </resources>

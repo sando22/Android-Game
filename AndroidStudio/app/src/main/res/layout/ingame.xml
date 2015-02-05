@@ -19,15 +19,6 @@
         android:onClick="onClick" />
 
     <TextView
-        android:id="@+id/ingameQuestion"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/ingameJokerButton"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp" />
-
-    <TextView
         android:id="@+id/ingameStreakCounter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -94,15 +85,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/answersLinearLayout"
-        android:layout_alignTop="@id/ingameQuestion"
+        android:layout_below="@id/ingameJokerButton"
         android:layout_margin="10dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/ingameQuestion"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="TUKA TREAE DA E FRagmentoo" />
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </RelativeLayout>

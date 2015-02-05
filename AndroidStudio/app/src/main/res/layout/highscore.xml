@@ -13,6 +13,7 @@
         android:background="@drawable/highscore_reset_button"
         android:onClick="onClick"
         android:text="@string/highscore_DeleteButton"
+        android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <TextView

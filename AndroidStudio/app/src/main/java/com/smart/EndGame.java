@@ -15,15 +15,17 @@ public class EndGame extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endgame);
+        score = InGame.getRightAnswersCounter();
 
         recordName = (EditText) findViewById(R.id.endgameRecordName);
         TextView lastQuestion = (TextView) findViewById(R.id.lastQuestion);
+        TextView rightAnswer = (TextView) findViewById(R.id.rightAnswer);
 
         if (InGame.resumeFunctionality == 404) {
             lastQuestion.setText(InGame.getCurrentQuestion());
+            rightAnswer.setText(InGame.getCurrentRightAnswer());
             lastQuestion.setVisibility(View.VISIBLE);
-            score = InGame.getRightAnswersCounter();
-            InGame.ingameActivity.finish();
+            rightAnswer.setVisibility(View.VISIBLE);
         }
     }
 
@@ -32,11 +34,11 @@ public class EndGame extends Activity {
         switch (v.getId()) {
             case R.id.endgameSaveButton:
                 if (recordName.getText().toString().matches("")) {
-                    saveToast.setText("Can't save without name!");
+                    saveToast.setText("Въведи име!");
                     saveToast.show();
                 } else {
                     fileManager.writeScoreFile(String.valueOf(score) + " - " + recordName.getText().toString());
-                    saveToast.setText("saved");
+                    saveToast.setText("запазено");
                     saveToast.show();
                     InGame.ingameActivity.finish();
                     finish();

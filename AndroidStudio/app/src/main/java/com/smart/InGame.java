@@ -1,6 +1,8 @@
 package com.smart;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,10 +11,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class InGame extends Activity {
+public class InGame extends Activity implements JokersFragment.FragmentCommunicator {
     public static Activity ingameActivity;
     public static int resumeFunctionality = 0, rightAnswersCounter = 0;
     public static Button answerButton1, answerButton2, answerButton3, answerButton4;
@@ -21,9 +24,10 @@ public class InGame extends Activity {
     private Handler handler = new Handler();
     private QuestionManager questionManager = Menu.quesstionManager;
     private TextView questionTextView, streakCounterTextView;
-    private ArrayList<Button> answerButtonsList = new ArrayList<Button>();
+    private ArrayList<Button> answerButtonsList = new ArrayList<>();
     private ImageButton jokerButton;
     private ProgressBar resultProgressBar;
+    private FragmentManager fragmentManager;
 
     public static String getCurrentQuestion() {
         return question.getQuestionTitle();
@@ -57,8 +61,9 @@ public class InGame extends Activity {
         streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
         jokerButton = (ImageButton) findViewById(R.id.ingameJokerButton);
         resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
-        streakCounterTextView.setText("Alpha testing!");
+        streakCounterTextView.setText("Beta testing!");
         ingameActivity = this;
+        fragmentManager = getFragmentManager();
         questionManager.generateQuestionList();
     }
 
@@ -83,7 +88,7 @@ public class InGame extends Activity {
         super.onDestroy();
         resumeFunctionality = 0;
         rightAnswersCounter = 0;
-        for (int i = 0; i < 3; i++) Jokers.usedJokers[i] = 0;
+        for (int i = 0; i < 3; i++) JokersFragment.usedJokers[i] = 0;
     }
 
     protected void init() {
@@ -93,12 +98,13 @@ public class InGame extends Activity {
         } else {
             Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
             InGame.this.startActivity(myEndgameIntent);
+            finish();
         }
     }
 
     private void setUiText() {
         int i = 0;
-        streakCounterTextView.setText(String.valueOf(rightAnswersCounter));
+        //streakCounterTextView.setText(String.valueOf(rightAnswersCounter));
         questionTextView.setText(question.getQuestionTitle());
         ArrayList<String> answerList = question.getAnswerList();
         for (Button button : answerButtonsList) {
@@ -160,8 +166,16 @@ public class InGame extends Activity {
                 }
                 break;
             case R.id.ingameJokerButton:
-                Intent myJokerIntent = new Intent(InGame.this, Jokers.class);
-                InGame.this.startActivity(myJokerIntent);
+                JokersFragment jokerFragment = (JokersFragment) fragmentManager.findFragmentByTag("JOKERFRAGMENT");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                if (jokerFragment == null) {
+                    jokerFragment = new JokersFragment();
+                    transaction.add(R.id.fragmentLayout, jokerFragment, "JOKERFRAGMENT");
+                    transaction.commit();
+                } else {
+                    transaction.remove(jokerFragment);
+                    transaction.commit();
+                }
                 break;
         }
     }
@@ -202,4 +216,27 @@ public class InGame extends Activity {
         jokerButton.setClickable(false);
     }
 
+    @Override
+    public void audienceVote(int vote) {
+        Toast toast = Toast.makeText(this, getString(R.string.audience_toast) + " " + question.getAnswerList().get(vote), Toast.LENGTH_LONG);
+        View view = toast.getView();
+        view.setBackgroundResource(R.drawable.audience_toast);
+        TextView text = (TextView) view.findViewById(android.R.id.message);
+        text.setTextColor(getResources().getColor(R.color.audienceToastTextColor));
+        text.setTextSize(getResources().getDimension(R.dimen.audience_toast_text_size));
+        toast.show();
+    }
+
+    @Override
+    public void changeQuestion() {
+        init();
+    }
+
+    @Override
+    public void removeFragment() {
+        JokersFragment jokerFragment = (JokersFragment) fragmentManager.findFragmentByTag("JOKERFRAGMENT");
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.remove(jokerFragment);
+        transaction.commit();
+    }
 }

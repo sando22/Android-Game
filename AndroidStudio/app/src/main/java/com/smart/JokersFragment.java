@@ -1,23 +1,29 @@
 package com.smart;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.Random;
 
 public class JokersFragment extends Fragment {
+    private FragmentCommunicator fragmentCommunicator;
 
-    Toast helpToast;
     int rightAnswerNumber;
     int i, j;
     static int[] usedJokers = new int[3];
     Random random = new Random();
     Button fiftyButton, changeButton, audienceButton;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        fragmentCommunicator = (FragmentCommunicator) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +55,6 @@ public class JokersFragment extends Fragment {
                     }
                 });
 
-        helpToast = Toast.makeText(getActivity(), "aaa", Toast.LENGTH_SHORT);
-
         return view;
     }
 
@@ -59,15 +63,15 @@ public class JokersFragment extends Fragment {
             if (usedJokers[k] == 1) {
                 switch (k) {
                     case 0:
-//                        audienceButton.setBackgroundResource(R.drawable.joker_public_gg);
+                        audienceButton.setBackgroundResource(R.drawable.joker_buttons_used);
                         audienceButton.setEnabled(false);
                         break;
                     case 1:
-//                        changeButton.setBackgroundResource(R.drawable.joker_change_gg);
+                        changeButton.setBackgroundResource(R.drawable.joker_buttons_used);
                         changeButton.setEnabled(false);
                         break;
                     case 2:
-//                        fiftyButton.setBackgroundResource(R.drawable.joker_50_gg);
+                        fiftyButton.setBackgroundResource(R.drawable.joker_buttons_used);
                         fiftyButton.setEnabled(false);
                         break;
                 }
@@ -76,16 +80,24 @@ public class JokersFragment extends Fragment {
     }
 
     private void audienceWork() {
-        helpToast.setText("Audience voted mostly for " + InGame.getCurrentRightAnswer());
-        helpToast.show();
         usedJokers[0] = 1;
+        if (random.nextInt(99) < 80) {
+            fragmentCommunicator.audienceVote(rightAnswerNumber);
+        } else {
+            int i;
+            do {
+                i = random.nextInt(4);
+            } while (i == rightAnswerNumber);
+            fragmentCommunicator.audienceVote(i);
+        }
+        fragmentCommunicator.removeFragment();
     }
 
     private void changeWork() {
-        helpToast.setText("Answer changed");
-        helpToast.show();
         InGame.resumeFunctionality = 0;
         usedJokers[1] = 1;
+        fragmentCommunicator.changeQuestion();
+        fragmentCommunicator.removeFragment();
     }
 
     private void fiftyWork() {
@@ -93,12 +105,13 @@ public class JokersFragment extends Fragment {
             i = random.nextInt(4);
             j = random.nextInt(4);
         } while (i == rightAnswerNumber || j == rightAnswerNumber || i == j);
-        disableButtons(i);
-        disableButtons(j);
+        disableAnswerButtons(i);
+        disableAnswerButtons(j);
         usedJokers[2] = 1;
+        fragmentCommunicator.removeFragment();
     }
 
-    private void disableButtons(int but) {
+    private void disableAnswerButtons(int but) {
         switch (but) {
             case 0:
                 InGame.answerButton1.setEnabled(false);
@@ -113,5 +126,13 @@ public class JokersFragment extends Fragment {
                 InGame.answerButton4.setEnabled(false);
                 break;
         }
+    }
+
+    interface FragmentCommunicator {
+        public void audienceVote(int vote);
+
+        public void changeQuestion();
+
+        public void removeFragment();
     }
 }

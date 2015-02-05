@@ -5,10 +5,9 @@
         <shape>
             <corners android:radius="5dip" />
             <gradient
-                android:startColor="#80669900"
-                android:endColor="#80CC0000"
                 android:angle="45"
-                />
+                android:endColor="#80CC0000"
+                android:startColor="#80669900" />
         </shape>
     </item>
 
@@ -16,10 +15,9 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="#669900"
-                    android:endColor="#CC0000"
                     android:angle="45"
-                    />
+                    android:endColor="#CC0000"
+                    android:startColor="#669900" />
                 <corners android:radius="5dp" />
             </shape>
         </clip>
