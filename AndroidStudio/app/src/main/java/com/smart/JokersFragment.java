@@ -11,13 +11,12 @@ import android.widget.Button;
 import java.util.Random;
 
 public class JokersFragment extends Fragment {
-    private FragmentCommunicator fragmentCommunicator;
-
+    static int[] usedJokers = new int[3];
     int rightAnswerNumber;
     int i, j;
-    static int[] usedJokers = new int[3];
     Random random = new Random();
     Button fiftyButton, changeButton, audienceButton;
+    private FragmentCommunicator fragmentCommunicator;
 
     @Override
     public void onAttach(Activity activity) {

@@ -20,13 +20,14 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     public static int resumeFunctionality = 0, answeredRightCounter = 0;
     public static Button answerButton1, answerButton2, answerButton3, answerButton4;
     public static Question question;
-    Runnable runRight = new Runnable() {
+
+    private Runnable runRight = new Runnable() {
         public void run() {
             init();
             setDefaultButton();
         }
     };
-    Runnable runWrong = new Runnable() {
+    private Runnable runWrong = new Runnable() {
         public void run() {
             goToAnsweredWrong();
             setDefaultButton();
