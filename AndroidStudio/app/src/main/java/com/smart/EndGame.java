@@ -15,7 +15,7 @@ public class EndGame extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endgame);
-        score = InGame.getRightAnswersCounter();
+        score = InGame.getAnsweredRightCounter();
 
         recordName = (EditText) findViewById(R.id.endgameRecordName);
         TextView lastQuestion = (TextView) findViewById(R.id.lastQuestion);

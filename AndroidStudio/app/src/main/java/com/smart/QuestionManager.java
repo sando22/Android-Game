@@ -23,7 +23,7 @@ public class QuestionManager {
                 }
                 while (startingLine < wholeFile.length) {
                     questionList.add(createQuestion(startingLine));
-                    startingLine += 5;
+                    startingLine += 6;
                 }
             }
         });
@@ -35,14 +35,13 @@ public class QuestionManager {
         }
     }
 
-    public Question getNextQuestion() {
+    public Question getNextQuestion(int diff) {
         int currentRandomPick;
-        if (questionList.size() > 1) {
+        Question nextQuestion;
+        do {
             currentRandomPick = random.nextInt(questionList.size() - 1);
-        } else {
-            currentRandomPick = 0;
-        }
-        Question nextQuestion = questionList.get(currentRandomPick);
+            nextQuestion = questionList.get(currentRandomPick);
+        } while (nextQuestion.getDifficulty() != diff);
         questionList.remove(currentRandomPick);
         nextQuestion.shuffleAnswers();
 
@@ -52,9 +51,11 @@ public class QuestionManager {
     private Question createQuestion(int startingLine) {
         String question;
         ArrayList<String> answers = new ArrayList<String>();
+        int difficulty;
         question = wholeFile[startingLine];
-        answers.addAll(Arrays.asList(wholeFile).subList(startingLine + 1, startingLine + 5));
-        return new Question(question, answers);
+        difficulty = Integer.parseInt(wholeFile[startingLine + 1]);
+        answers.addAll(Arrays.asList(wholeFile).subList(startingLine + 2, startingLine + 6));
+        return new Question(question, answers, difficulty);
     }
 
     public boolean hasMoreQuestions() {

@@ -7,10 +7,16 @@ public class Question {
     private String questionTitle;
     private int correctAnswer;
     private ArrayList<String> answerList = new ArrayList<String>();
+    private int difficulty;
 
-    public Question(String question, ArrayList<String> answers) {
+    public Question(String question, ArrayList<String> answers, int diff) {
         this.questionTitle = question;
         this.answerList = answers;
+        this.difficulty = diff;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 
     public String getQuestionTitle() {

@@ -17,10 +17,21 @@ import java.util.ArrayList;
 
 public class InGame extends Activity implements JokersFragment.FragmentCommunicator {
     public static Activity ingameActivity;
-    public static int resumeFunctionality = 0, rightAnswersCounter = 0;
+    public static int resumeFunctionality = 0, answeredRightCounter = 0;
     public static Button answerButton1, answerButton2, answerButton3, answerButton4;
     public static Question question;
-
+    Runnable runRight = new Runnable() {
+        public void run() {
+            init();
+            setDefaultButton();
+        }
+    };
+    Runnable runWrong = new Runnable() {
+        public void run() {
+            goToAnsweredWrong();
+            setDefaultButton();
+        }
+    };
     private Handler handler = new Handler();
     private QuestionManager questionManager = Menu.quesstionManager;
     private TextView questionTextView, streakCounterTextView;
@@ -37,8 +48,8 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         return question.getAnswerList().get(question.getCorrectAnswer());
     }
 
-    public static int getRightAnswersCounter() {
-        return rightAnswersCounter;
+    public static int getAnsweredRightCounter() {
+        return answeredRightCounter;
     }
 
     public static int getCurrentRightAnswerNumber() {
@@ -67,7 +78,6 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         questionManager.generateQuestionList();
     }
 
-
     @Override
     public void onBackPressed() {
         Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
@@ -87,13 +97,13 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     protected void onDestroy() {
         super.onDestroy();
         resumeFunctionality = 0;
-        rightAnswersCounter = 0;
+        answeredRightCounter = 0;
         for (int i = 0; i < 3; i++) JokersFragment.usedJokers[i] = 0;
     }
 
     protected void init() {
-        if (questionManager.hasMoreQuestions() && rightAnswersCounter < 30) {
-            question = questionManager.getNextQuestion();
+        if (questionManager.hasMoreQuestions() && answeredRightCounter < 30) {
+            question = questionManager.getNextQuestion(answeredRightCounter / 10);
             setUiText();
         } else {
             Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
@@ -104,13 +114,13 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
 
     private void setUiText() {
         int i = 0;
-        //streakCounterTextView.setText(String.valueOf(rightAnswersCounter));
+        //streakCounterTextView.setText(String.valueOf(answeredRightCounter));
         questionTextView.setText(question.getQuestionTitle());
         ArrayList<String> answerList = question.getAnswerList();
         for (Button button : answerButtonsList) {
             button.setText(answerList.get(i));
             i++;
-            resultProgressBar.setProgress(rightAnswersCounter);
+            resultProgressBar.setProgress(answeredRightCounter);
             button.setEnabled(true);
         }
     }
@@ -122,7 +132,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
                     answerButton1.setBackgroundResource(R.drawable.ingame_answered_right);
                     setUnclickableButtons();
                     handler.postDelayed(runRight, 750);
-                    rightAnswersCounter++;
+                    answeredRightCounter++;
                 } else {
                     answerButton1.setBackgroundResource(R.drawable.ingame_answered_wrong);
                     setUnclickableButtons();
@@ -134,7 +144,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
                     answerButton2.setBackgroundResource(R.drawable.ingame_answered_right);
                     setUnclickableButtons();
                     handler.postDelayed(runRight, 750);
-                    rightAnswersCounter++;
+                    answeredRightCounter++;
                 } else {
                     answerButton2.setBackgroundResource(R.drawable.ingame_answered_wrong);
                     setUnclickableButtons();
@@ -146,7 +156,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
                     answerButton3.setBackgroundResource(R.drawable.ingame_answered_right);
                     setUnclickableButtons();
                     handler.postDelayed(runRight, 750);
-                    rightAnswersCounter++;
+                    answeredRightCounter++;
                 } else {
                     answerButton3.setBackgroundResource(R.drawable.ingame_answered_wrong);
                     setUnclickableButtons();
@@ -158,7 +168,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
                     answerButton4.setBackgroundResource(R.drawable.ingame_answered_right);
                     setUnclickableButtons();
                     handler.postDelayed(runRight, 750);
-                    rightAnswersCounter++;
+                    answeredRightCounter++;
                 } else {
                     answerButton4.setBackgroundResource(R.drawable.ingame_answered_wrong);
                     setUnclickableButtons();
@@ -186,20 +196,6 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         resumeFunctionality = 404;
         finish();
     }
-
-    Runnable runRight = new Runnable() {
-        public void run() {
-            init();
-            setDefaultButton();
-        }
-    };
-
-    Runnable runWrong = new Runnable() {
-        public void run() {
-            goToAnsweredWrong();
-            setDefaultButton();
-        }
-    };
 
     private void setDefaultButton() {
         for (Button button : answerButtonsList) {
