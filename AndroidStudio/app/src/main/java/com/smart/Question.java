@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Question {
     private String questionTitle;
     private int correctAnswer;
-    private ArrayList<String> answerList = new ArrayList<String>();
+    private ArrayList<String> answerList = new ArrayList<>();
     private int difficulty;
 
     public Question(String question, ArrayList<String> answers, int diff) {

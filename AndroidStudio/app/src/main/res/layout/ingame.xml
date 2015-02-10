@@ -44,16 +44,7 @@
             android:max="30" />
 
         <Button
-            android:id="@+id/D"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/ingame_answer"
-            android:onClick="onClick"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/C"
+            android:id="@+id/A"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -71,7 +62,16 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/A"
+            android:id="@+id/C"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/ingame_answer"
+            android:onClick="onClick"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/D"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

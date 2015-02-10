@@ -89,14 +89,14 @@ public class JokersFragment extends Fragment {
             } while (i == rightAnswerNumber);
             fragmentCommunicator.audienceVote(i);
         }
-        fragmentCommunicator.removeFragment();
+        fragmentCommunicator.changeFragmentDisplay();
     }
 
     private void changeWork() {
         InGame.resumeFunctionality = 0;
         usedJokers[1] = 1;
         fragmentCommunicator.changeQuestion();
-        fragmentCommunicator.removeFragment();
+        fragmentCommunicator.changeFragmentDisplay();
     }
 
     private void fiftyWork() {
@@ -107,24 +107,11 @@ public class JokersFragment extends Fragment {
         disableAnswerButtons(i);
         disableAnswerButtons(j);
         usedJokers[2] = 1;
-        fragmentCommunicator.removeFragment();
+        fragmentCommunicator.changeFragmentDisplay();
     }
 
-    private void disableAnswerButtons(int but) {
-        switch (but) {
-            case 0:
-                InGame.answerButton1.setEnabled(false);
-                break;
-            case 1:
-                InGame.answerButton2.setEnabled(false);
-                break;
-            case 2:
-                InGame.answerButton3.setEnabled(false);
-                break;
-            case 3:
-                InGame.answerButton4.setEnabled(false);
-                break;
-        }
+    private void disableAnswerButtons(int toDisable) {
+        InGame.answerButtonsList.get(toDisable).setEnabled(false);
     }
 
     interface FragmentCommunicator {
@@ -132,6 +119,6 @@ public class JokersFragment extends Fragment {
 
         public void changeQuestion();
 
-        public void removeFragment();
+        public void changeFragmentDisplay();
     }
 }
