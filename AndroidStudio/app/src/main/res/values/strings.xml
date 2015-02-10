@@ -16,7 +16,9 @@
     <string name="menu_OnlineButton">beta</string>
     <string name="audience_toast">Звездите ти казаха</string>
     <string name="fifty_joker_text">50/50</string>
-    <string name="change_joker_text">махни тоя въпрос</string>
-    <string name="audience_joker_text">попитай ✦★✦</string>
+    <string name="change_joker_text">skip</string>
+    <string name="audience_joker_text">✦★✦</string>
+    <string name="endgame_home_button">изход</string>
+    <string name="endgame_save_button">запази</string>
 
 </resources>
