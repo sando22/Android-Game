@@ -48,7 +48,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/menu_buttons"
             android:onClick="onClick"
-            android:text="beta"
+            android:text="@string/menu_onlinehighscore_button"
             android:textSize="20sp" />
 
     </LinearLayout>

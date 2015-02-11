@@ -20,5 +20,6 @@
     <string name="audience_joker_text">✦★✦</string>
     <string name="endgame_home_button">изход</string>
     <string name="endgame_save_button">запази</string>
+    <string name="menu_onlinehighscore_button">Глобална класация</string>
 
 </resources>

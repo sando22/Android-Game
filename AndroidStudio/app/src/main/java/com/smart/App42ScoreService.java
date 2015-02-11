@@ -9,25 +9,25 @@ import com.shephertz.app42.paas.sdk.android.game.ScoreBoardService;
 
 import java.math.BigDecimal;
 
-public class AsyncApp42ScoreServiceApi {
-    private static AsyncApp42ScoreServiceApi mInstance = null;
+public class App42ScoreService {
+    private static App42ScoreService myInstance = null;
     private ScoreBoardService scoreBoardService;
 
-    private AsyncApp42ScoreServiceApi() {
-        ServiceAPI sp = new ServiceAPI(Constants.App42ApiKey,
+    private App42ScoreService() {
+        ServiceAPI serviceAPI = new ServiceAPI(Constants.App42ApiKey,
                 Constants.App42ApiSecret);
-        this.scoreBoardService = sp.buildScoreBoardService();
+        this.scoreBoardService = serviceAPI.buildScoreBoardService();
     }
 
-    public static AsyncApp42ScoreServiceApi instance() {
-        if (mInstance == null) {
-            mInstance = new AsyncApp42ScoreServiceApi();
+    public static App42ScoreService instance() {
+        if (myInstance == null) {
+            myInstance = new App42ScoreService();
         }
-        return mInstance;
+        return myInstance;
     }
 
     public void saveScoreForUser(final String gameName,
-                                 final String gameUserName, final BigDecimal gameScore, final App42ScoreBoardServiceListener callBack) {
+                                 final String gameUserName, final BigDecimal gameScore, final App42ScoreWriter callBack) {
         final Handler callerThreadHandler = new Handler();
         new Thread() {
             @Override
@@ -55,7 +55,7 @@ public class AsyncApp42ScoreServiceApi {
     }
 
     public void getLeaderBoard(final String gameName,
-                               final int max, final App42ScoreBoardServiceListener callBack) {
+                               final int max, final App42ScoreReader callBack) {
         final Handler callerThreadHandler = new Handler();
         new Thread() {
             @Override
@@ -82,14 +82,15 @@ public class AsyncApp42ScoreServiceApi {
         }.start();
     }
 
-    public static interface App42ScoreBoardServiceListener {
+    public static interface App42ScoreWriter {
         void onSaveScoreSuccess(Game response);
 
         void onSaveScoreFailed(App42Exception ex);
+    }
 
+    public static interface App42ScoreReader {
         void onLeaderBoardSuccess(Game response);
 
         void onLeaderBoardFailed(App42Exception ex);
     }
-
 }
