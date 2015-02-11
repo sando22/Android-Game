@@ -49,8 +49,7 @@
             android:background="@drawable/menu_buttons"
             android:onClick="onClick"
             android:text="beta"
-            android:textSize="20sp"
-            android:visibility="invisible" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
