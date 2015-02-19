@@ -29,15 +29,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HighScore"
+            android:name=".HighScoreSlider"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".EndGame"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".OnlineHighScore"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
     </application>

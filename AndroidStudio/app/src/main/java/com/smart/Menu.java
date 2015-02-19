@@ -28,12 +28,8 @@ public class Menu extends Activity {
                 Menu.this.startActivity(myIntent);
                 break;
             case R.id.menuScoresButton:
-                Intent myScoreIntent = new Intent(Menu.this, HighScore.class);
+                Intent myScoreIntent = new Intent(Menu.this, HighScoreSlider.class);
                 Menu.this.startActivity(myScoreIntent);
-                break;
-            case R.id.menuBetaButton:
-                Intent myBetaIntent = new Intent(Menu.this, OnlineHighScore.class);
-                Menu.this.startActivity(myBetaIntent);
                 break;
         }
     }
