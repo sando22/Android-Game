@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:hint="@string/highscore_ScoreText"
+        android:hint="@string/local_highscore_hint"
         android:lineSpacingMultiplier="1.2"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

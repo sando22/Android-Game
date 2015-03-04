@@ -57,7 +57,6 @@ public class GlobalHighScoreFragment extends Fragment implements App42ScoreServi
     @Override
     public void onLeaderBoardFailed(App42Exception ex) {
         globalHighScoreFragmentCommunicator.hideLoadingPanel();
-        scoreText.setText("Няма връзка с интернет!");
     }
 
     interface GlobalHighScoreFragmentCommunicator {

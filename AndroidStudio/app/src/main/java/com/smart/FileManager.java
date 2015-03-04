@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class FileManager {
     private AssetManager assetManager;
     private Context context;
-    private ArrayList<String> wholeFileList = new ArrayList<String>();
+    private ArrayList<String> wholeFileList = new ArrayList<>();
 
     public FileManager(Context activityContext) {
         context = activityContext;
@@ -51,7 +51,7 @@ public class FileManager {
     }
 
     public ArrayList<String> readScoreFile() {
-        final ArrayList<String> arrayListScores = new ArrayList<String>();
+        final ArrayList<String> arrayListScores = new ArrayList<>();
         Thread readScoreThread = new Thread(new Runnable() {
             @Override
             public void run() {

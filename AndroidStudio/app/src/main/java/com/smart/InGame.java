@@ -45,7 +45,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     }
 
     public static String getCurrentRightAnswer() {
-        return question.getAnswerList().get(question.getCorrectAnswer());
+        return question.getAnswersList().get(question.getCorrectAnswer());
     }
 
     public static int getAnsweredRightCounter() {
@@ -101,7 +101,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     protected void init() {
         if (questionManager.hasMoreQuestions() && answeredRightCounter < 30) {
             question = questionManager.getNextQuestion(answeredRightCounter / 10);
-            setUiText();
+            updateUI();
         } else {
             Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
             InGame.this.startActivity(myEndgameIntent);
@@ -109,15 +109,15 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         }
     }
 
-    private void setUiText() {
+    private void updateUI() {
         int i = 0;
         //streakCounterTextView.setText(String.valueOf(answeredRightCounter));
         questionTextView.setText(question.getQuestionTitle());
-        ArrayList<String> answerList = question.getAnswerList();
+        ArrayList<String> answerList = question.getAnswersList();
+        resultProgressBar.setProgress(answeredRightCounter);
         for (Button button : answerButtonsList) {
             button.setText(answerList.get(i));
             i++;
-            resultProgressBar.setProgress(answeredRightCounter);
             button.setEnabled(true);
         }
     }
@@ -179,7 +179,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
 
     @Override
     public void audienceVote(int vote) {
-        Toast toast = Toast.makeText(this, getString(R.string.audience_toast) + " " + question.getAnswerList().get(vote), Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, getString(R.string.audience_toast) + " " + question.getAnswersList().get(vote), Toast.LENGTH_LONG);
         View view = toast.getView();
         view.setBackgroundResource(R.drawable.audience_toast);
         TextView text = (TextView) view.findViewById(android.R.id.message);

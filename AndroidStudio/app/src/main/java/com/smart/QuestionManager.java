@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class QuestionManager {
-    private ArrayList<Question> questionList = new ArrayList<Question>();
+    private ArrayList<Question> questionList = new ArrayList<>();
     private FileManager fileManager = Menu.fileManager;
     private Random random = new Random();
     private String[] wholeFile;
@@ -50,7 +50,7 @@ public class QuestionManager {
 
     private Question createQuestion(int startingLine) {
         String question;
-        ArrayList<String> answers = new ArrayList<String>();
+        ArrayList<String> answers = new ArrayList<>();
         int difficulty;
         question = wholeFile[startingLine];
         difficulty = Integer.parseInt(wholeFile[startingLine + 1]);

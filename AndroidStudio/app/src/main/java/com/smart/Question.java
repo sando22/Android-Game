@@ -6,12 +6,12 @@ import java.util.Collections;
 public class Question {
     private String questionTitle;
     private int correctAnswer;
-    private ArrayList<String> answerList = new ArrayList<>();
+    private ArrayList<String> answersList = new ArrayList<>();
     private int difficulty;
 
     public Question(String question, ArrayList<String> answers, int diff) {
         this.questionTitle = question;
-        this.answerList = answers;
+        this.answersList = answers;
         this.difficulty = diff;
     }
 
@@ -27,19 +27,19 @@ public class Question {
         return correctAnswer;
     }
 
-    public ArrayList<String> getAnswerList() {
-        return answerList;
+    public ArrayList<String> getAnswersList() {
+        return answersList;
     }
 
     public void shuffleAnswers() {
         Thread shuffleThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Collections.shuffle(answerList);
+                Collections.shuffle(answersList);
                 for (int i = 0; i < 4; i++) {
-                    if (answerList.get(i).contains("+")) {
+                    if (answersList.get(i).contains("+")) {
                         correctAnswer = i;
-                        answerList.set(i, answerList.get(i).substring(1));
+                        answersList.set(i, answersList.get(i).substring(1));
                     }
                 }
             }
