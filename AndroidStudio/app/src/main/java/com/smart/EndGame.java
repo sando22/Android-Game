@@ -78,7 +78,7 @@ public class EndGame extends Activity implements App42ScoreService.App42ScoreWri
     }
 
     public void saveScore(int score, String name) {
-        progressDialog = ProgressDialog.show(this, "", "Saving Score..");
+        progressDialog = ProgressDialog.show(this, "", "Запазване на резултата..");
         progressDialog.setCancelable(true);
         fileManager.writeScoreFile(String.valueOf(score) + " - " + name);
         asyncService.saveScoreForUser(Constants.App42GameName, name, BigDecimal.valueOf(score), this);

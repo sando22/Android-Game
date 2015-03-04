@@ -93,7 +93,6 @@ public class JokersFragment extends Fragment {
     }
 
     private void changeWork() {
-        InGame.resumeFunctionality = 0;
         usedJokers[1] = 1;
         fragmentCommunicator.changeQuestion();
         fragmentCommunicator.changeFragmentDisplay();
