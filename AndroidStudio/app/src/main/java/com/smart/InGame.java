@@ -99,8 +99,8 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     }
 
     protected void init() {
-        if (questionManager.hasMoreQuestions() && answeredRightCounter < 30) {
-            question = questionManager.getNextQuestion(answeredRightCounter / 10);
+        if (questionManager.hasMoreQuestions() && answeredRightCounter < Constants.DifficultyStep * 2) {
+            question = questionManager.getNextQuestion(answeredRightCounter / Constants.DifficultyStep);
             updateUI();
         } else {
             Intent myEndgameIntent = new Intent(InGame.this, EndGame.class);
