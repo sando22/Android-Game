@@ -99,7 +99,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     }
 
     protected void init() {
-        if (questionManager.hasMoreQuestions() && answeredRightCounter < Constants.DifficultyStep * 2) {
+        if (questionManager.hasMoreQuestions() && answeredRightCounter < Constants.GameLength) {
             question = questionManager.getNextQuestion(answeredRightCounter / Constants.DifficultyStep);
             updateUI();
         } else {
