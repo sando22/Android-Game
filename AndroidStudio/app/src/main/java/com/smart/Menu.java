@@ -31,6 +31,10 @@ public class Menu extends Activity {
                 Intent myScoreIntent = new Intent(Menu.this, HighScoreSlider.class);
                 Menu.this.startActivity(myScoreIntent);
                 break;
+            case R.id.menuQuestionSubmitButton:
+                Intent myQuestionSubmitIntent = new Intent(Menu.this, QuestionSubmit.class);
+                Menu.this.startActivity(myQuestionSubmitIntent);
+                break;
         }
     }
 }

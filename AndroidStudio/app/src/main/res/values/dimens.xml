@@ -9,5 +9,8 @@
     <dimen name="endgame_buttons_radius">10dp</dimen>
     <dimen name="endgame_buttons_width">100dp</dimen>
     <dimen name="highscore_textview_padding">10dp</dimen>
+    <dimen name="questionsubmit_textview_bottommargin">5dp</dimen>
+    <dimen name="questionsubmit_textview_largemargin">15dp</dimen>
+    <dimen name="questionsubmit_radiobuttons_space">15dp</dimen>
 
 </resources>

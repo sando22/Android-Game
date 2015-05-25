@@ -58,7 +58,6 @@ public class EndGame extends Activity implements App42ScoreService.App42ScoreWri
         }
     }
 
-    //TODO tuka sushto se promenq
     private int calculateScore(int rightAnswers) {
         int score;
         if (rightAnswers > Constants.DifficultyStep * 2) {

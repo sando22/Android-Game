@@ -20,10 +20,18 @@
     <string name="audience_joker_text">✦★✦</string>
     <string name="endgame_home_button">изход</string>
     <string name="endgame_save_button">запази</string>
-    <string name="menu_onlinehighscore_button">Глобална класация</string>
+    <string name="menu_sendquestion_button">Изпрати въпрос</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="local_highscore_string">Локална класация</string>
     <string name="global_highscore_string">Глобална класация</string>
     <string name="global_highscore_hint">Няма връзка с интернет!</string>
+    <string name="questionsubmit_question_textview">Въведи въпрос:</string>
+    <string name="questionsubmit_wronganswer_textview">Грешен отговор</string>
+    <string name="questionsubmit_rightanswer_textview">Верен отговор</string>
+    <string name="questionsubmit_difficulty_textview">Избери трудност</string>
+    <string name="questionsubmit_radiobutton_easy">Лесен</string>
+    <string name="questionsubmit_radiobutton_medium">Нормален</string>
+    <string name="questionsubmit_radiobutton_hard">Труден</string>
+    <string name="questionsubmit_sendbutton_text">Изпрати</string>
 
 </resources>
