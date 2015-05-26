@@ -15,6 +15,7 @@
         android:text="@string/questionsubmit_question_textview" />
 
     <EditText
+        android:id="@+id/questionsubmitQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -26,6 +27,7 @@
         android:text="@string/questionsubmit_rightanswer_textview" />
 
     <EditText
+        android:id="@+id/questionsubmitanswer1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -37,6 +39,7 @@
         android:text="@string/questionsubmit_wronganswer_textview" />
 
     <EditText
+        android:id="@+id/questionsubmitanswer2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -48,6 +51,7 @@
         android:text="@string/questionsubmit_wronganswer_textview" />
 
     <EditText
+        android:id="@+id/questionsubmitanswer3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -59,6 +63,7 @@
         android:text="@string/questionsubmit_wronganswer_textview" />
 
     <EditText
+        android:id="@+id/questionsubmitanswer4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -76,23 +81,26 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/questionsubmitRadioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="radioClicked"
             android:text="@string/questionsubmit_radiobutton_easy" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/questionsubmitRadioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/questionsubmit_radiobuttons_space"
             android:layout_marginRight="@dimen/questionsubmit_radiobuttons_space"
+            android:onClick="radioClicked"
             android:text="@string/questionsubmit_radiobutton_medium" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/questionsubmitRadioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="radioClicked"
             android:text="@string/questionsubmit_radiobutton_hard" />
     </RadioGroup>
 
@@ -102,7 +110,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/menu_buttons"
-        android:text="@string/questionsubmit_sendbutton_text"
-        android:onClick="sendQuestion"/>
+        android:onClick="sendQuestion"
+        android:text="@string/questionsubmit_sendbutton_text" />
 
 </LinearLayout>

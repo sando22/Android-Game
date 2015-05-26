@@ -33,5 +33,6 @@
     <string name="questionsubmit_radiobutton_medium">Нормален</string>
     <string name="questionsubmit_radiobutton_hard">Труден</string>
     <string name="questionsubmit_sendbutton_text">Изпрати</string>
+    <string name="questionsubmit_error_toast">Трябва да се попълнят всички полета</string>
 
 </resources>

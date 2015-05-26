@@ -14,7 +14,7 @@ import com.shephertz.app42.paas.sdk.android.game.Game;
 import java.math.BigDecimal;
 
 public class EndGame extends Activity implements App42ScoreService.App42ScoreWriter {
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private EditText recordName;
     private FileManager fileManager = Menu.fileManager;
     private int score;
