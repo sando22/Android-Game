@@ -1,9 +1,7 @@
 package com.smart;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -104,19 +102,5 @@ public class QuestionSubmit extends Activity implements App42ServiceApi.App42Sto
         progressDialog.dismiss();
         questionSubmitToast.setText(R.string.questionsubmit_senderror_toast);
         questionSubmitToast.show();
-        createAlertDialog("Exception Occurred : " + ex.getMessage());
-    }
-
-    public void createAlertDialog(String msg) {
-        AlertDialog.Builder alertbox = new AlertDialog.Builder(
-                QuestionSubmit.this);
-        alertbox.setTitle("Response Message");
-        alertbox.setMessage(msg);
-        alertbox.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            // do something when the button is clicked
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
-        });
-        alertbox.show();
     }
 }
