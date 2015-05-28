@@ -6,4 +6,6 @@ public class Constants {
     static final String App42GameName = "TestSample2.0";
     static final int GameLength = 15;
     static final int DifficultyStep = GameLength / 3;
+    static final String dbName = "GAMEDB";
+    static final String collectionName = "devTest";
 }

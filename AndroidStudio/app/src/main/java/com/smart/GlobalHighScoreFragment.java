@@ -13,10 +13,10 @@ import com.shephertz.app42.paas.sdk.android.game.Game;
 
 import java.math.BigDecimal;
 
-public class GlobalHighScoreFragment extends Fragment implements App42ScoreService.App42ScoreReader {
+public class GlobalHighScoreFragment extends Fragment implements App42ServiceApi.App42ScoreReader {
 
     TextView scoreText;
-    private App42ScoreService asyncService;
+    private App42ServiceApi asyncService;
     private GlobalHighScoreFragmentCommunicator globalHighScoreFragmentCommunicator;
 
     @Override
@@ -24,7 +24,7 @@ public class GlobalHighScoreFragment extends Fragment implements App42ScoreServi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_global_high_score, container, false);
         scoreText = (TextView) view.findViewById(R.id.onlineHighscoreScoreText);
-        asyncService = App42ScoreService.instance();
+        asyncService = App42ServiceApi.instance();
         getScore();
         return view;
     }

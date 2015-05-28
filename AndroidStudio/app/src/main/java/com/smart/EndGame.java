@@ -13,12 +13,12 @@ import com.shephertz.app42.paas.sdk.android.game.Game;
 
 import java.math.BigDecimal;
 
-public class EndGame extends Activity implements App42ScoreService.App42ScoreWriter {
+public class EndGame extends Activity implements App42ServiceApi.App42ScoreWriter {
     private ProgressDialog progressDialog;
     private EditText recordName;
     private FileManager fileManager = Menu.fileManager;
     private int score;
-    private App42ScoreService asyncService;
+    private App42ServiceApi asyncService;
     private Toast saveToast;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class EndGame extends Activity implements App42ScoreService.App42ScoreWri
         recordName = (EditText) findViewById(R.id.endgameRecordName);
         TextView lastQuestion = (TextView) findViewById(R.id.lastQuestion);
         TextView rightAnswer = (TextView) findViewById(R.id.rightAnswer);
-        asyncService = App42ScoreService.instance();
+        asyncService = App42ServiceApi.instance();
         saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 
         if (InGame.resumeFunctionality == 404) {
