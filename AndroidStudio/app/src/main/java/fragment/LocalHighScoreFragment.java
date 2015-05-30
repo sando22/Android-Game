@@ -1,4 +1,4 @@
-package com.smart;
+package fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import activity.Menu;
+import activity.R;
+import helper.HighScoreComparator;
+import manager.FileManager;
 
 public class LocalHighScoreFragment extends Fragment {
 
@@ -57,7 +62,7 @@ public class LocalHighScoreFragment extends Fragment {
         return stringToPost;
     }
 
-    interface LocalHighScoreFragmentCommunicator {
-        public void resetLocalScores();
+    public interface LocalHighScoreFragmentCommunicator {
+        void resetLocalScores();
     }
 }

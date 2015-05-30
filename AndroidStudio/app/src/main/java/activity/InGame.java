@@ -1,4 +1,4 @@
-package com.smart;
+package activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -15,29 +15,33 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import fragment.JokersFragment;
+import helper.Constants;
+import manager.QuestionManager;
+import model.Question;
+
 public class InGame extends Activity implements JokersFragment.FragmentCommunicator {
     public static Activity ingameActivity;
     public static int resumeFunctionality = 0, answeredRightCounter = 0;
     public static Question question;
     public static ArrayList<Button> answerButtonsList = new ArrayList<>();
-
-    private Runnable runRight = new Runnable() {
-        public void run() {
-            init();
-            setDefaultButton();
-        }
-    };
+    private Handler handler = new Handler();
+    private QuestionManager questionManager = Menu.quesstionManager;
+    private TextView questionTextView;
+    private ImageButton jokerButton;
     private Runnable runWrong = new Runnable() {
         public void run() {
             goToAnsweredWrong();
             setDefaultButton();
         }
     };
-    private Handler handler = new Handler();
-    private QuestionManager questionManager = Menu.quesstionManager;
-    private TextView questionTextView;
-    private ImageButton jokerButton;
     private ProgressBar resultProgressBar;
+    private Runnable runRight = new Runnable() {
+        public void run() {
+            init();
+            setDefaultButton();
+        }
+    };
     private FragmentManager fragmentManager;
 
     public static String getCurrentQuestion() {
@@ -65,13 +69,16 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         answerButtonsList.add((Button) findViewById(R.id.C));
         answerButtonsList.add((Button) findViewById(R.id.D));
         questionTextView = (TextView) findViewById(R.id.ingameQuestion);
-        TextView streakCounterTextView = (TextView) findViewById(R.id.ingameStreakCounter);
         jokerButton = (ImageButton) findViewById(R.id.ingameJokerButton);
         resultProgressBar = (ProgressBar) findViewById(R.id.resultProgressBar);
-        streakCounterTextView.setText("Beta testing!");
         ingameActivity = this;
         fragmentManager = getFragmentManager();
         questionManager.generateQuestionList();
+        int tag = 0;
+        for (Button button : answerButtonsList) {
+            button.setTag(tag);
+            tag++;
+        }
     }
 
     @Override
@@ -94,7 +101,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         super.onDestroy();
         resumeFunctionality = 0;
         answeredRightCounter = 0;
-        for (int i = 0; i < 3; i++) JokersFragment.usedJokers[i] = 0;
+        JokersFragment.usedJokers = new int[3];
         answerButtonsList.clear();
     }
 
@@ -110,39 +117,17 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     }
 
     private void updateUI() {
-        int i = 0;
-        //streakCounterTextView.setText(String.valueOf(answeredRightCounter));
         questionTextView.setText(question.getQuestionTitle());
         ArrayList<String> answerList = question.getAnswersList();
         resultProgressBar.setProgress(answeredRightCounter);
         for (Button button : answerButtonsList) {
-            button.setText(answerList.get(i));
-            i++;
+            button.setText(answerList.get(answerButtonsList.indexOf(button)));
             button.setEnabled(true);
         }
     }
 
-    public void onClick(View v) throws InterruptedException {
-        switch (v.getId()) {
-            case R.id.A:
-                processAnswer(0);
-                break;
-            case R.id.B:
-                processAnswer(1);
-                break;
-            case R.id.C:
-                processAnswer(2);
-                break;
-            case R.id.D:
-                processAnswer(3);
-                break;
-            case R.id.ingameJokerButton:
-                changeFragmentDisplay();
-                break;
-        }
-    }
-
-    private void processAnswer(int keyID) {
+    public void processAnswer(View v) {
+        int keyID = (int) v.getTag();
         if (question.getCorrectAnswer() == keyID) {
             answerButtonsList.get(keyID).setBackgroundResource(R.drawable.ingame_answered_right);
             setUnclickableButtons();
@@ -158,7 +143,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     void goToAnsweredWrong() {
         Intent myAnsweredWrongIntent = new Intent(InGame.this, EndGame.class);
         InGame.this.startActivity(myAnsweredWrongIntent);
-        resumeFunctionality = 404;
+        resumeFunctionality = Constants.END_OF_GAME;
         finish();
     }
 
@@ -194,7 +179,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
     }
 
     @Override
-    public void changeFragmentDisplay() {
+    public void changeFragmentDisplay(View v) {
         JokersFragment jokerFragment = (JokersFragment) fragmentManager.findFragmentByTag("JOKERFRAGMENT");
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (jokerFragment == null) {

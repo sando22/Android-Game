@@ -1,4 +1,4 @@
-package com.smart;
+package activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,6 +12,9 @@ import com.shephertz.app42.paas.sdk.android.storage.Storage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import App42Api.App42ServiceApi;
+import helper.Constants;
 
 public class QuestionSubmit extends Activity implements App42ServiceApi.App42StorageServiceListener {
     EditText question;
@@ -60,7 +63,7 @@ public class QuestionSubmit extends Activity implements App42ServiceApi.App42Sto
 
     public void sendQuestion(View v) {
         if (isValid()) {
-            progressDialog = ProgressDialog.show(this, "", "Изпращане");
+            progressDialog = ProgressDialog.show(this, "", getString(R.string.questionsubmit_sending_progressdialog_message));
             progressDialog.setCancelable(true);
             JSONObject jsonToSave = new JSONObject();
             try {

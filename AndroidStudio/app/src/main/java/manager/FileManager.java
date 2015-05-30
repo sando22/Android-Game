@@ -1,4 +1,4 @@
-package com.smart;
+package manager;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
+import activity.R;
+
 public class FileManager {
     private AssetManager assetManager;
     private Context context;
@@ -22,7 +24,7 @@ public class FileManager {
         context = activityContext;
     }
 
-    public String[] readQuestionFile() {
+    public ArrayList<String> readQuestionFile() {
         Thread readQuestionsThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -47,7 +49,7 @@ public class FileManager {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return wholeFileList.toArray(new String[wholeFileList.size()]);
+        return wholeFileList;
     }
 
     public ArrayList<String> readScoreFile() {

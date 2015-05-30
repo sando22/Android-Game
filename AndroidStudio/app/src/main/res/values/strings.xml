@@ -36,5 +36,6 @@
     <string name="questionsubmit_fielderror_toast">Трябва да се попълнят всички полета</string>
     <string name="questionsubmit_senderror_toast">Неизправна връзка с интернет</string>
     <string name="questionsubmit_success_toast">Въпросът е изпратен</string>
+    <string name="questionsubmit_sending_progressdialog_message">Изпращане</string>
 
 </resources>

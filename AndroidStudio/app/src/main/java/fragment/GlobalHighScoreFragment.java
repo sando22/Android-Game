@@ -1,4 +1,4 @@
-package com.smart;
+package fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,8 +13,13 @@ import com.shephertz.app42.paas.sdk.android.game.Game;
 
 import java.math.BigDecimal;
 
+import App42Api.App42ServiceApi;
+import activity.R;
+import helper.Constants;
+
 public class GlobalHighScoreFragment extends Fragment implements App42ServiceApi.App42ScoreReader {
 
+    private final int SCORES_TO_SHOW = 10;
     TextView scoreText;
     private App42ServiceApi asyncService;
     private GlobalHighScoreFragmentCommunicator globalHighScoreFragmentCommunicator;
@@ -31,7 +36,7 @@ public class GlobalHighScoreFragment extends Fragment implements App42ServiceApi
 
     public void getScore() {
         globalHighScoreFragmentCommunicator.showLoadingPanel();
-        asyncService.getLeaderBoard(Constants.App42GameName, 10, this);
+        asyncService.getLeaderBoard(Constants.App42GameName, SCORES_TO_SHOW, this);
     }
 
     @Override
@@ -44,10 +49,10 @@ public class GlobalHighScoreFragment extends Fragment implements App42ServiceApi
     public void onLeaderBoardSuccess(Game response) {
         globalHighScoreFragmentCommunicator.hideLoadingPanel();
         String text = "";
-        for (int i = 0; i < response.getScoreList().size(); i++) {
-            BigDecimal scoreValue = response.getScoreList().get(i).getValue();
+        for (Game.Score gameScore : response.getScoreList()) {
+            BigDecimal scoreValue = gameScore.getValue();
             text += scoreValue.toString() + " - ";
-            String name = response.getScoreList().get(i).getUserName();
+            String name = gameScore.getUserName();
             text += name + "\n";
         }
         scoreText.setText(text);
@@ -59,9 +64,9 @@ public class GlobalHighScoreFragment extends Fragment implements App42ServiceApi
         globalHighScoreFragmentCommunicator.hideLoadingPanel();
     }
 
-    interface GlobalHighScoreFragmentCommunicator {
-        public void showLoadingPanel();
+    public interface GlobalHighScoreFragmentCommunicator {
+        void showLoadingPanel();
 
-        public void hideLoadingPanel();
+        void hideLoadingPanel();
     }
 }

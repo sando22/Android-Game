@@ -1,4 +1,4 @@
-package com.smart;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,10 +36,10 @@ public class Question {
             @Override
             public void run() {
                 Collections.shuffle(answersList);
-                for (int i = 0; i < 4; i++) {
-                    if (answersList.get(i).contains("+")) {
-                        correctAnswer = i;
-                        answersList.set(i, answersList.get(i).substring(1));
+                for (String answer : answersList) {
+                    if (answer.startsWith("+")) {
+                        correctAnswer = answersList.indexOf(answer);
+                        answersList.set(answersList.indexOf(answer), answer.substring(1));
                     }
                 }
             }

@@ -1,29 +1,36 @@
-package com.smart;
+package manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
+import activity.Menu;
+import model.Question;
+
 public class QuestionManager {
+    private final int QUESTION_SIZE_IN_FILE = 6;
+    private final int QUESTION_INDEX = 0;
+    private final int DIFFICULTY_INDEX = 1;
+    private final int ANSWER_START_INDEX = 2;
+    private final int ANSWER_END_INDEX = 6;
+
     private ArrayList<Question> questionList = new ArrayList<>();
     private FileManager fileManager = Menu.fileManager;
     private Random random = new Random();
-    private String[] wholeFile;
+    private ArrayList<String> wholeFile;
 
     public void generateQuestionList() {
         Thread generateQuestionThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                int startingLine = 0;
-                if (!questionList.isEmpty()) {
-                    questionList.clear();
-                }
+                int currentIndex = 0;
+                questionList.clear();
                 if (wholeFile == null) {
                     wholeFile = fileManager.readQuestionFile();
                 }
-                while (startingLine < wholeFile.length) {
-                    questionList.add(createQuestion(startingLine));
-                    startingLine += 6;
+                while (currentIndex < wholeFile.size()) {
+                    questionList.add(createQuestion(wholeFile.subList(currentIndex, currentIndex + QUESTION_SIZE_IN_FILE)));
+                    currentIndex += QUESTION_SIZE_IN_FILE;
                 }
             }
         });
@@ -48,13 +55,13 @@ public class QuestionManager {
         return nextQuestion;
     }
 
-    private Question createQuestion(int startingLine) {
+    private Question createQuestion(List<String> questionLines) {
         String question;
         ArrayList<String> answers = new ArrayList<>();
         int difficulty;
-        question = wholeFile[startingLine];
-        difficulty = Integer.parseInt(wholeFile[startingLine + 1]);
-        answers.addAll(Arrays.asList(wholeFile).subList(startingLine + 2, startingLine + 6));
+        question = questionLines.get(QUESTION_INDEX);
+        difficulty = Integer.parseInt(questionLines.get(DIFFICULTY_INDEX));
+        answers.addAll(questionLines.subList(ANSWER_START_INDEX, ANSWER_END_INDEX));
         return new Question(question, answers, difficulty);
     }
 

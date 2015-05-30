@@ -1,9 +1,12 @@
-package com.smart;
+package activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import manager.FileManager;
+import manager.QuestionManager;
 
 public class Menu extends Activity {
     public static FileManager fileManager;

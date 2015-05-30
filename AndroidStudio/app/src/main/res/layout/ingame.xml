@@ -14,17 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ingameStreakCounter"
-        android:background="@drawable/ingame_joker_button"
-        android:onClick="onClick" />
-
-    <TextView
-        android:id="@+id/ingameStreakCounter"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textSize="15sp" />
+        android:background="@drawable/ingame_joker_button"
+        android:onClick="changeFragmentDisplay" />
 
     <LinearLayout
         android:id="@+id/answersLinearLayout"
@@ -49,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:onClick="onClick"
+            android:onClick="processAnswer"
             android:textSize="20sp" />
 
         <Button
@@ -58,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:onClick="onClick"
+            android:onClick="processAnswer"
             android:textSize="20sp" />
 
         <Button
@@ -67,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:onClick="onClick"
+            android:onClick="processAnswer"
             android:textSize="20sp" />
 
         <Button
@@ -76,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/ingame_answer"
-            android:onClick="onClick"
+            android:onClick="processAnswer"
             android:textSize="20sp" />
     </LinearLayout>
 

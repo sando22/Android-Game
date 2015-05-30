@@ -1,4 +1,4 @@
-package com.smart;
+package fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -10,8 +10,14 @@ import android.widget.Button;
 
 import java.util.Random;
 
+import activity.InGame;
+import activity.R;
+
 public class JokersFragment extends Fragment {
-    static int[] usedJokers = new int[3];
+    public static int[] usedJokers = new int[3];
+    private final int AUDIENCE_JOKER_INDEX = 0;
+    private final int CHANGE_JOKER_INDEX = 1;
+    private final int FIFTY_JOKER_INDEX = 2;
     int rightAnswerNumber;
     int i, j;
     Random random = new Random();
@@ -79,7 +85,7 @@ public class JokersFragment extends Fragment {
     }
 
     private void audienceWork() {
-        usedJokers[0] = 1;
+        usedJokers[AUDIENCE_JOKER_INDEX] = 1;
         if (random.nextInt(99) < 80) {
             fragmentCommunicator.audienceVote(rightAnswerNumber);
         } else {
@@ -89,13 +95,13 @@ public class JokersFragment extends Fragment {
             } while (i == rightAnswerNumber);
             fragmentCommunicator.audienceVote(i);
         }
-        fragmentCommunicator.changeFragmentDisplay();
+        fragmentCommunicator.changeFragmentDisplay(this.getView());
     }
 
     private void changeWork() {
-        usedJokers[1] = 1;
+        usedJokers[CHANGE_JOKER_INDEX] = 1;
         fragmentCommunicator.changeQuestion();
-        fragmentCommunicator.changeFragmentDisplay();
+        fragmentCommunicator.changeFragmentDisplay(this.getView());
     }
 
     private void fiftyWork() {
@@ -105,19 +111,19 @@ public class JokersFragment extends Fragment {
         } while (i == rightAnswerNumber || j == rightAnswerNumber || i == j);
         disableAnswerButtons(i);
         disableAnswerButtons(j);
-        usedJokers[2] = 1;
-        fragmentCommunicator.changeFragmentDisplay();
+        usedJokers[FIFTY_JOKER_INDEX] = 1;
+        fragmentCommunicator.changeFragmentDisplay(this.getView());
     }
 
     private void disableAnswerButtons(int toDisable) {
         InGame.answerButtonsList.get(toDisable).setEnabled(false);
     }
 
-    interface FragmentCommunicator {
-        public void audienceVote(int vote);
+    public interface FragmentCommunicator {
+        void audienceVote(int vote);
 
-        public void changeQuestion();
+        void changeQuestion();
 
-        public void changeFragmentDisplay();
+        void changeFragmentDisplay(View v);
     }
 }

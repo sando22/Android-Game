@@ -1,4 +1,4 @@
-package com.smart;
+package App42Api;
 
 import android.os.Handler;
 
@@ -12,6 +12,8 @@ import com.shephertz.app42.paas.sdk.android.storage.StorageService;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+
+import helper.Constants;
 
 public class App42ServiceApi {
     private static App42ServiceApi myInstance = null;
@@ -116,19 +118,19 @@ public class App42ServiceApi {
         }.start();
     }
 
-    public static interface App42ScoreWriter {
+    public interface App42ScoreWriter {
         void onSaveScoreSuccess(Game response);
 
         void onSaveScoreFailed(App42Exception ex);
     }
 
-    public static interface App42ScoreReader {
+    public interface App42ScoreReader {
         void onLeaderBoardSuccess(Game response);
 
         void onLeaderBoardFailed(App42Exception ex);
     }
 
-    public static interface App42StorageServiceListener {
+    public interface App42StorageServiceListener {
 
         void onDocumentInserted(Storage response);
 

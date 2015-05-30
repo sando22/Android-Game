@@ -1,4 +1,4 @@
-package com.smart;
+package activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,6 +12,11 @@ import com.shephertz.app42.paas.sdk.android.App42Exception;
 import com.shephertz.app42.paas.sdk.android.game.Game;
 
 import java.math.BigDecimal;
+
+import App42Api.App42ServiceApi;
+import fragment.JokersFragment;
+import helper.Constants;
+import manager.FileManager;
 
 public class EndGame extends Activity implements App42ServiceApi.App42ScoreWriter {
     private ProgressDialog progressDialog;
@@ -61,16 +66,16 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
     private int calculateScore(int rightAnswers) {
         int score;
         if (rightAnswers > Constants.DifficultyStep * 2) {
-            score = (rightAnswers - Constants.DifficultyStep * 2) * 100 + Constants.DifficultyStep * 50 + Constants.DifficultyStep * 10;
+            score = (rightAnswers - Constants.DifficultyStep * 2) * 100 + Constants.DifficultyStep * 50 + Constants.DifficultyStep * 20;
         } else if (rightAnswers > Constants.DifficultyStep) {
-            score = (rightAnswers - Constants.DifficultyStep) * 50 + Constants.DifficultyStep * 10;
+            score = (rightAnswers - Constants.DifficultyStep) * 50 + Constants.DifficultyStep * 20;
         } else {
-            score = Constants.DifficultyStep * 10;
+            score = Constants.DifficultyStep * 20;
         }
         int bonus = 0;
-        for (int i = 0; i < 3; i++) {
-            if (JokersFragment.usedJokers[i] == 0) {
-                bonus += score / 2;
+        for (int joker : JokersFragment.usedJokers) {
+            if (joker == 0) {
+                bonus += score / 10;
             }
         }
         score += bonus;
@@ -87,7 +92,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
     @Override
     public void onSaveScoreSuccess(Game response) {
         progressDialog.dismiss();
-        saveToast.setText("резултатът е качен");
+        saveToast.setText("запазено");
         saveToast.show();
         InGame.ingameActivity.finish();
         finish();
@@ -96,7 +101,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
     @Override
     public void onSaveScoreFailed(App42Exception ex) {
         progressDialog.dismiss();
-        saveToast.setText("запазено само локално");
+        saveToast.setText("запазено");
         saveToast.show();
         InGame.ingameActivity.finish();
         finish();
