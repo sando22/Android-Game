@@ -14,7 +14,6 @@ import com.shephertz.app42.paas.sdk.android.game.Game;
 import java.math.BigDecimal;
 
 import App42Api.App42ServiceApi;
-import fragment.JokersFragment;
 import helper.Constants;
 import manager.FileManager;
 
@@ -37,7 +36,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
         asyncService = App42ServiceApi.instance();
         saveToast = Toast.makeText(getBaseContext(), "", Toast.LENGTH_SHORT);
 
-        if (InGame.resumeFunctionality == 404) {
+        if (InGame.resumeFunctionality == Constants.END_OF_GAME) {
             lastQuestion.setText(InGame.getCurrentQuestion());
             rightAnswer.setText(InGame.getCurrentRightAnswer());
             lastQuestion.setVisibility(View.VISIBLE);
@@ -49,7 +48,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
         switch (v.getId()) {
             case R.id.endgameSaveButton:
                 if (recordName.getText().toString().matches("")) {
-                    saveToast.setText("Въведи име!");
+                    saveToast.setText(R.string.endgame_toast_on_empty_name);
                     saveToast.show();
                 } else {
                     String name = this.recordName.getText().toString();
@@ -65,25 +64,20 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
 
     private int calculateScore(int rightAnswers) {
         int score;
-        if (rightAnswers > Constants.DifficultyStep * 2) {
+        if (rightAnswers >= Constants.DifficultyStep * 2) {
             score = (rightAnswers - Constants.DifficultyStep * 2) * 100 + Constants.DifficultyStep * 50 + Constants.DifficultyStep * 20;
-        } else if (rightAnswers > Constants.DifficultyStep) {
+        } else if (rightAnswers >= Constants.DifficultyStep) {
             score = (rightAnswers - Constants.DifficultyStep) * 50 + Constants.DifficultyStep * 20;
+        } else if (rightAnswers > 0) {
+            score = rightAnswers * 20;
         } else {
-            score = Constants.DifficultyStep * 20;
+            score = 0;
         }
-        int bonus = 0;
-        for (int joker : JokersFragment.usedJokers) {
-            if (joker == 0) {
-                bonus += score / 10;
-            }
-        }
-        score += bonus;
         return score;
     }
 
     public void saveScore(int score, String name) {
-        progressDialog = ProgressDialog.show(this, "", "Запазване на резултата..");
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.endgame_progressdialog_saving_message));
         progressDialog.setCancelable(true);
         fileManager.writeScoreFile(String.valueOf(score) + " - " + name);
         asyncService.saveScoreForUser(Constants.App42GameName, name, BigDecimal.valueOf(score), this);
@@ -92,7 +86,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
     @Override
     public void onSaveScoreSuccess(Game response) {
         progressDialog.dismiss();
-        saveToast.setText("запазено");
+        saveToast.setText(R.string.endgame_toast_on_saving_success);
         saveToast.show();
         InGame.ingameActivity.finish();
         finish();
@@ -101,7 +95,7 @@ public class EndGame extends Activity implements App42ServiceApi.App42ScoreWrite
     @Override
     public void onSaveScoreFailed(App42Exception ex) {
         progressDialog.dismiss();
-        saveToast.setText("запазено");
+        saveToast.setText(R.string.endgame_toast_on_saving_success);
         saveToast.show();
         InGame.ingameActivity.finish();
         finish();

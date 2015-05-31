@@ -37,5 +37,10 @@
     <string name="questionsubmit_senderror_toast">Неизправна връзка с интернет</string>
     <string name="questionsubmit_success_toast">Въпросът е изпратен</string>
     <string name="questionsubmit_sending_progressdialog_message">Изпращане</string>
+    <string name="endgame_toast_on_empty_name">Въведи име</string>
+    <string name="endgame_progressdialog_saving_message">Запазване на резултата..</string>
+    <string name="endgame_toast_on_saving_success">Запазено</string>
+    <string name="highscoreslider_progressdialog_loading_message">Зареждане</string>
+    <string name="filemanager_error_tag">Login activity</string>
 
 </resources>

@@ -10,19 +10,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
-        android:padding="@dimen/highscore_textview_padding"
-        android:gravity="end"
         android:background="@color/contrastToBackgroundColor"
-        android:textColor="@color/audienceToastTextColor"
-        android:text="@string/local_highscore_string" />
+        android:gravity="end"
+        android:padding="@dimen/highscore_textview_padding"
+        android:text="@string/local_highscore_string"
+        android:textColor="@color/audienceToastTextColor" />
 
     <TextView
         android:id="@+id/highscoreScoreText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_centerVertical="true"
         android:hint="@string/local_highscore_hint"
         android:lineSpacingMultiplier="1.2"
         android:textAppearance="?android:attr/textAppearanceMedium" />

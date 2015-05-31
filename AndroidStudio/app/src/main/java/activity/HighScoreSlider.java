@@ -40,7 +40,7 @@ public class HighScoreSlider extends FragmentActivity implements
 
     @Override
     public void showLoadingPanel() {
-        progressDialog = ProgressDialog.show(this, "", "Зареждане..");
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.highscoreslider_progressdialog_loading_message));
         progressDialog.setCancelable(true);
     }
 
