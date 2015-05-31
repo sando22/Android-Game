@@ -85,11 +85,11 @@ public class QuestionSubmit extends Activity implements App42ServiceApi.App42Sto
 
     public Boolean isValid() {
         return !(difficulty == -1
-                || question.getText().toString().equals("")
-                || rightanswer.getText().toString().equals("")
-                || answer2.getText().toString().equals("")
-                || answer3.getText().toString().equals("")
-                || answer4.getText().toString().equals(""));
+                || question.getText().toString().trim().length() <= 0
+                || rightanswer.getText().toString().trim().length() <= 0
+                || answer2.getText().toString().trim().length() <= 0
+                || answer3.getText().toString().trim().length() <= 0
+                || answer4.getText().toString().trim().length() <= 0);
     }
 
     @Override

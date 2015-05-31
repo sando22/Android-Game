@@ -101,7 +101,7 @@ public class InGame extends Activity implements JokersFragment.FragmentCommunica
         super.onDestroy();
         resumeFunctionality = 0;
         answeredRightCounter = 0;
-        JokersFragment.usedJokers = new int[3];
+        JokersFragment.usedJokers = new boolean[]{false, false, false};
         answerButtonsList.clear();
     }
 

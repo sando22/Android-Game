@@ -14,7 +14,7 @@ import activity.InGame;
 import activity.R;
 
 public class JokersFragment extends Fragment {
-    public static int[] usedJokers = new int[3];
+    public static boolean[] usedJokers = new boolean[]{false, false, false};
     private final int AUDIENCE_JOKER_INDEX = 0;
     private final int CHANGE_JOKER_INDEX = 1;
     private final int FIFTY_JOKER_INDEX = 2;
@@ -64,9 +64,10 @@ public class JokersFragment extends Fragment {
     }
 
     private void setButtonsGraphic() {
-        for (int k = 0; k < 3; k++) {
-            if (usedJokers[k] == 1) {
-                switch (k) {
+        int index = 0;
+        for (boolean usedJoker : usedJokers) {
+            if (usedJoker) {
+                switch (index) {
                     case 0:
                         audienceButton.setBackgroundResource(R.drawable.joker_buttons_used);
                         audienceButton.setEnabled(false);
@@ -79,13 +80,16 @@ public class JokersFragment extends Fragment {
                         fiftyButton.setBackgroundResource(R.drawable.joker_buttons_used);
                         fiftyButton.setEnabled(false);
                         break;
+                    default:
+                        break;
                 }
+                index++;
             }
         }
     }
 
     private void audienceWork() {
-        usedJokers[AUDIENCE_JOKER_INDEX] = 1;
+        usedJokers[AUDIENCE_JOKER_INDEX] = true;
         if (random.nextInt(99) < 80) {
             fragmentCommunicator.audienceVote(rightAnswerNumber);
         } else {
@@ -99,7 +103,7 @@ public class JokersFragment extends Fragment {
     }
 
     private void changeWork() {
-        usedJokers[CHANGE_JOKER_INDEX] = 1;
+        usedJokers[CHANGE_JOKER_INDEX] = true;
         fragmentCommunicator.changeQuestion();
         fragmentCommunicator.changeFragmentDisplay(this.getView());
     }
@@ -111,7 +115,7 @@ public class JokersFragment extends Fragment {
         } while (i == rightAnswerNumber || j == rightAnswerNumber || i == j);
         disableAnswerButtons(i);
         disableAnswerButtons(j);
-        usedJokers[FIFTY_JOKER_INDEX] = 1;
+        usedJokers[FIFTY_JOKER_INDEX] = true;
         fragmentCommunicator.changeFragmentDisplay(this.getView());
     }
 
