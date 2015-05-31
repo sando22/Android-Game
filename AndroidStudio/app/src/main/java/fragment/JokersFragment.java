@@ -83,8 +83,8 @@ public class JokersFragment extends Fragment {
                     default:
                         break;
                 }
-                index++;
             }
+            index++;
         }
     }
 
